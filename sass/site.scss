@@ -102,7 +102,9 @@
 
 html {
   // Een anker springt niet tot onder de bovenrand van het venster.
-  scroll-padding-top: var(--ruimte-5);
+  // De kop blijft staan, dus een anker springt tot onder de kop en niet
+  // erachter.
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -314,8 +316,14 @@ a:hover {
 
 // Kop ------------------------------------------------------------------------
 
+// De kop blijft bij het scrollen staan, zodat het menu en de naam altijd
+// binnen bereik zijn. Hij is ondoorzichtig, want de tekst schuift eronder
+// door.
 .kop {
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: var(--grond);
   border-bottom: 1px solid var(--lijn);
 }
 

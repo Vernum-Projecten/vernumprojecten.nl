@@ -77,8 +77,8 @@ en de versienummering volgt [Semantic Versioning 2.0.0](https://semver.org/lang/
   zijn de telefoon en een breder scherm krijgt er lagen bij op 40, 48 en
   60 rem. De typeschaal schaalt met `clamp()` mee met het venster.
 - De paginakop draagt het merkteken met de naam als tekst, en onder 40 rem
-  een menu dat zonder JavaScript opengaat. Elke link en elke knop is minstens
-  44 px hoog.
+  een menu dat zonder JavaScript opengaat. De kop blijft bij het scrollen
+  staan. Elke link en elke knop is minstens 44 px hoog.
 - De voet zet de naam, de plaats, het KVK-nummer en het btw-nummer elk op een
   eigen regel, zodat er niets meer midden in een nummer afbreekt.
 - `/privacy/` is een volledige verklaring onder de AVG: wie de
