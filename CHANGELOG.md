@@ -11,6 +11,10 @@ en de versienummering volgt [Semantic Versioning 2.0.0](https://semver.org/lang/
 
 ### Toegevoegd
 
+- `/voorwaarden/`: de algemene voorwaarden, gemarkeerd als concept tot de
+  eigenaar ze vaststelt. De NLdigital Voorwaarden 2025 zijn niet gebruikt,
+  omdat een niet-lid ze koopt vanaf € 395 en ze niet mag aanpassen (gelezen
+  20-09-2026). De pagina staat in de voet van elke pagina.
 - De site zelf: vijf pagina's in het Nederlands (Home, Diensten, Werkwijze,
   Over, Contact, Privacy) en een 404, gebouwd door Zola uit Tera-sjablonen.
   Geen JavaScript, geen cookie, geen bestand van een andere oorsprong.
@@ -60,6 +64,11 @@ en de versienummering volgt [Semantic Versioning 2.0.0](https://semver.org/lang/
   bouwen in stappen en het testen naar de overdracht, en noemt nog steeds geen
   bedrag en geen termijn zolang die niet zijn vastgesteld.
 - De 404-pagina is één zin en een link naar de startpagina.
+- `/privacy/` is een volledige verklaring onder de AVG: wie de
+  verwerkingsverantwoordelijke is, wat de site zelf doet, wat de hosting
+  vastlegt, wat er met een e-mail gebeurt, op welke grondslag (artikel 6, lid
+  1, onderdelen b en f) en welke rechten u heeft (artikel 15 tot en met 21 en
+  artikel 77).
 - Beide workflows draaien op `ubuntu-latest` in plaats van op de eigen
   machines van de organisatie. Deze repository is openbaar, dus de runners
   van GitHub zijn er gratis voor, en de site wacht niet meer in een rij achter

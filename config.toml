@@ -15,7 +15,7 @@ author = "Vernum Projecten B.V."
 compile_sass = true
 
 # Geen zoekindex: die zou een JSON-bestand van een paar honderd kilobyte
-# toevoegen dat alleen met JavaScript te gebruiken is, en de site heeft vijf
+# toevoegen dat alleen met JavaScript te gebruiken is, en de site heeft zes
 # pagina's.
 build_search_index = false
 
@@ -78,3 +78,7 @@ naam = "Contact"
 [[extra.voetlinks]]
 pad = "/privacy/"
 naam = "Privacy"
+
+[[extra.voetlinks]]
+pad = "/voorwaarden/"
+naam = "Voorwaarden"
