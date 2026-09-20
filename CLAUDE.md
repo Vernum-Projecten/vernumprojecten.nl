@@ -1,9 +1,12 @@
 # CLAUDE.md
 
 **vernumprojecten.nl** is the public website of Vernum Projecten B.V., an IT
-company in Groningen: software development, IT projects and integration, and
-advice. One director. The site is five pages and a 404, built by Zola from
-Tera templates and Dutch markdown, published on GitHub Pages at
+company in Groningen. Three services, set by the owner on 2026-09-20:
+IT consulting, software design, and software development. Management and
+maintenance are not offered; a project ends with a handover, and what runs the
+software after that is the client's choice. The site is five pages and a 404,
+built by Zola from Tera templates and Dutch markdown, published on GitHub
+Pages at
 <https://vernumprojecten.nl>. It carries no JavaScript, no cookies, no
 analytics and no tracker, and the build output is the whole of what a visitor
 receives.
@@ -142,7 +145,10 @@ Branch from `origin/HEAD` with a conventional type (`feat/`, `fix/`,
   "not X but Y", no decorative triads, and none of the banned words in either
   language. `scripts/checks/prose-style.sh` fails on any hit, per edit through
   the hook and in CI. A sentence a reader cannot verify does not belong on the
-  site.
+  site. A page addresses the reader as "u" and speaks about the client's
+  problem and the work; the size of the company, the number of people or
+  directors, the year of incorporation and the legal structure are never a
+  selling point (owner ruling 2026-09-20).
 - **No JavaScript.** The site ships none, authored or third party, and no
   page loads a resource from another origin. That is what makes the privacy
   page true.

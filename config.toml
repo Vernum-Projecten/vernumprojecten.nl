@@ -7,7 +7,7 @@
 
 base_url = "https://vernumprojecten.nl"
 title = "Vernum Projecten B.V."
-description = "Vernum Projecten B.V. bouwt software, voert IT-projecten uit en adviseert over techniek. Eén bedrijf in Groningen, één aanspreekpunt."
+description = "Vernum Projecten B.V. adviseert over IT, ontwerpt software en bouwt die, voor organisaties met een proces waarvoor geen pakket past. Vanuit Groningen."
 default_language = "nl"
 author = "Vernum Projecten B.V."
 

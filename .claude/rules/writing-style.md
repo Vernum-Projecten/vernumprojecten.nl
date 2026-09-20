@@ -9,7 +9,19 @@ the `docs/` pages, everything under `.claude/`, the comment lines of the shell
 scripts, and every commit, pull request and issue body.
 
 Write plainly, so the text reads like a person wrote it for another person.
-This site has one director and a handful of pages; it does not need a voice.
+This site has a handful of pages; it does not need a voice.
+
+## What the site is about: the client, and the work
+
+Owner ruling 2026-09-20, after reading the first set of texts. A page speaks
+to the client, about the client's problem and what the company does about it.
+It never describes the company by its size, its number of people, its number
+of directors, the year it was incorporated, or its legal structure, and it
+never sells any of those as an advantage. The work is what a visitor comes
+for: what is built, when a client needs it, what they get, and how a project
+runs. Everything the law asks the site to publish stays on the contact page
+and in the footer, where it belongs (`CLAUDE.md`, "What the law asks the site
+to show").
 
 ## Which language
 
@@ -97,8 +109,9 @@ reaches a page.
 
 ## How to write instead
 
-- Address the reader as "je" in Dutch, "you" in English. Not "we" about the
-  reader, and never "de gebruiker".
+- Address the reader as "u" in Dutch (owner ruling 2026-09-20), "you" in
+  English. The company is "wij" about itself, never "we" about the reader, and
+  never "de gebruiker".
 - Use active voice. Name who does what.
 - Use present tense.
 - Keep sentences short, near 25 words. If a clause can be deleted and the

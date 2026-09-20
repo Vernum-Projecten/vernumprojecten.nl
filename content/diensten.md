@@ -1,48 +1,61 @@
 +++
 title = "Diensten"
-description = "Software schrijven, systemen koppelen en migreren, en meelezen met een keuze. Per onderdeel wat erin zit en wat je aan het eind krijgt."
+description = "IT-advies, softwareontwerp en softwareontwikkeling. Per onderdeel wat het is, wanneer u het nodig heeft en wat u krijgt."
 template = "page.html"
 weight = 1
 insert_anchor_links = "none"
 +++
 
-## Software schrijven
+## IT-advies
 
-Je hebt een proces waarvoor geen pakket bestaat, of waarvoor het pakket dat er
-is te veel meebrengt dat je niet nodig hebt. Dan bouwen we het zelf: een
-webtoepassing waar je team in werkt, een dienst die op de achtergrond draait,
-of gereedschap dat één taak doet.
+U staat voor een keuze rond een systeem en wilt die niet op gevoel maken. U
+kiest tussen twee pakketten, u wilt weten of wat er draait nog jaren meekan,
+of er ligt een offerte van een andere partij die u niet kunt beoordelen.
 
-Aan het eind heb je werkende software, de broncode en de rechten erop, en de
-documentatie om het te draaien. Wij schrijven het zo dat een andere
-ontwikkelaar het kan overnemen. Dat is niet ruimhartig bedoeld: het is wat een
-opdrachtgever met één leverancier nodig heeft.
+Wij lezen mee in wat er staat en praten met de mensen die ermee werken. U
+krijgt een geschreven oordeel: wat er nu is, wat het kost om dat te houden, en
+waar het risico zit in de weg die u overweegt. Er hangt geen voorwaarde aan
+dat wij daarna iets voor u bouwen. Is het antwoord dat u niets moet doen, dan
+staat dat er ook.
 
-## Systemen koppelen en migreren
+## Softwareontwerp
 
-Twee systemen die uit elkaar gegroeid zijn en dezelfde gegevens nodig hebben.
-Een overstap naar een nieuw pakket waarbij tien jaar aan gegevens mee moet.
-Een koppeling met een dienst van een derde partij die zijn eigen regels stelt.
+Voordat er gebouwd wordt, moet vastliggen wat er gebouwd wordt. Dat geldt voor
+een nieuw systeem en net zo goed voor een wijziging in een systeem dat al
+jaren draait en waarvan niemand meer overziet wat eraan vastzit.
 
-Het werk begint met lezen. Welke velden staan erin, wat betekenen ze, en wat
-gebeurt er als een veld leeg is of twee keer voorkomt. Pas daarna wordt er
-gebouwd, en een migratie draait eerst op een kopie van de echte gegevens. Wat
-daar misgaat, gaat mis op een kopie.
+Wij schrijven uw proces uit, bepalen welke gegevens het systeem bijhoudt en
+wat er met elk geval gebeurt dat afwijkt. Daarna leggen wij de opzet vast: uit
+welke onderdelen het systeem bestaat, waar het aan koppelt en wat het van die
+koppelingen verwacht.
 
-## Meelezen met een keuze
+U krijgt dat ontwerp op papier, in taal die u kunt nalezen zonder
+ontwikkelaar. Het is van u, ook als u het door een andere partij laat bouwen.
 
-Soms hoeft er niets gebouwd te worden. Je staat voor een keuze tussen twee
-pakketten, je wilt weten of een bestaand systeem nog jaren meekan, of er ligt
-een offerte van een andere partij die je niet kunt beoordelen.
+## Softwareontwikkeling
 
-Je krijgt dan een geschreven oordeel: wat er staat, wat het kost om het te
-houden, en waar het risico zit in de weg die je overweegt. Er hangt geen
-voorwaarde aan dat wij het daarna bouwen. Als het antwoord is dat je niets
-moet doen, staat dat er ook.
+Uw proces draait op een pakket dat er net naast zit, of op een spreadsheet die
+te groot is geworden. Dan bouwen wij de toepassing zelf: een webtoepassing
+waarin uw team werkt, een dienst die op de achtergrond gegevens verwerkt, een
+koppeling tussen twee systemen die dezelfde gegevens nodig hebben, of een
+overstap waarbij jaren aan gegevens mee moeten.
 
-## Waar we niet aan beginnen
+Er wordt in korte stappen gebouwd, en aan het eind van elke stap staat er iets
+dat werkt op een omgeving waar u zelf bij kunt. Wat opgeleverd wordt, is
+getest, en een overzetting van gegevens draait eerst op een kopie van de echte
+gegevens.
 
-Beheer van werkplekken, een helpdesk en netwerken vallen buiten wat dit bedrijf
-aanneemt. Er worden geen licenties en geen hardware verkocht.
+U krijgt werkende software, de broncode met de rechten zoals afgesproken, en
+de documentatie om die te installeren, in te stellen en terug te zetten.
+
+## Na de oplevering
+
+Een opdracht eindigt met de overdracht. Beheer en onderhoud nemen wij niet
+aan: wie de software daarna draait, bepaalt u zelf, en dat kunt u doen met uw
+eigen mensen of met een partij van uw keuze.
+
+Daarom is de overdracht ingericht op iemand die er niet bij was. Wij schrijven
+de software zo dat een andere ontwikkelaar die kan overnemen, en de
+documentatie hoort bij de oplevering.
 
 {{ <hoofdlink pad="@/werkwijze.md" tekst="Zo loopt een opdracht" /> }}

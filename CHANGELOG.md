@@ -47,6 +47,19 @@ en de versienummering volgt [Semantic Versioning 2.0.0](https://semver.org/lang/
 
 ### Gewijzigd
 
+- Alle zichtbare teksten zijn herschreven. Elke pagina gaat over het werk en
+  over de lezer, die met "u" wordt aangesproken. De omvang van het bedrijf,
+  het aantal bestuurders, het jaar van oprichting en de rechtsvorm staan
+  nergens meer als argument; wat de wet vraagt blijft op de contactpagina en
+  in de voet staan.
+- Diensten noemt de drie diensten zoals de eigenaar ze op 2026-09-20 heeft
+  vastgesteld: IT-advies, softwareontwerp en softwareontwikkeling. Beheer en
+  onderhoud worden niet aangeboden, en Diensten en Werkwijze zeggen dat: een
+  opdracht eindigt met de overdracht.
+- Werkwijze loopt van het eerste gesprek via het ontwerp en het plan, het
+  bouwen in stappen en het testen naar de overdracht, en noemt nog steeds geen
+  bedrag en geen termijn zolang die niet zijn vastgesteld.
+- De 404-pagina is één zin en een link naar de startpagina.
 - Beide workflows draaien op `ubuntu-latest` in plaats van op de eigen
   machines van de organisatie. Deze repository is openbaar, dus de runners
   van GitHub zijn er gratis voor, en de site wacht niet meer in een rij achter

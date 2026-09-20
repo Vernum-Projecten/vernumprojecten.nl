@@ -6,9 +6,10 @@ weight = 4
 insert_anchor_links = "none"
 +++
 
-Schrijf een e-mail. Zet erin wat er nu gebeurt en wat je wilt dat er gebeurt;
-dat is genoeg om te bepalen of dit werk is waar wij iets aan kunnen doen. Je
-krijgt antwoord van de persoon die het werk ook zou doen.
+Schrijf ons een e-mail. Zet erin wat er nu gebeurt en wat er zou moeten
+gebeuren; dat is genoeg om te bepalen of dit werk is waar wij iets aan kunnen
+doen. Weet u nog niet wat er moet gebeuren, dan is dat ook een vraag waarmee u
+hier terecht kunt.
 
 <dl class="gegevens">
   <div>
@@ -42,12 +43,12 @@ toegankelijk, en noemt daarbij zijn btw-identificatienummer. Dat staat in
 Dat het Handelsregisternummer op uitgaande berichten staat, vraagt
 [artikel 27 van de Handelsregisterwet 2007](https://wetten.overheid.nl/BWBR0021777).
 
-Wat er met je bericht gebeurt, staat op de pagina
+Wat er met uw bericht gebeurt, staat op de pagina
 [Privacy](@/privacy.md).
 
 ## Een beveiligingsprobleem melden
 
-Vind je een fout in deze site of in de repository eronder, meld die dan zoals
+Vindt u een fout in deze site of in de repository eronder, meld die dan zoals
 [SECURITY.md](https://github.com/Vernum-Projecten/vernumprojecten.nl/blob/main/SECURITY.md)
-beschrijft. Dat kan via de private meldknop van GitHub, zodat het tussen jou
-en ons blijft tot het opgelost is.
+beschrijft. Dat kan via de private meldknop van GitHub, zodat het tussen u en
+ons blijft tot het opgelost is.
