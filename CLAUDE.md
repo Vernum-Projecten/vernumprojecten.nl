@@ -42,22 +42,23 @@ Specification and product proper names stay as they are (`Zola`, `Tera`,
 
 ## The house style is the oracle
 
-The visual identity is the owner's, recorded as `docs/huisstijl.md` in the
-sibling repository and copied into this one as `assets/` plus
-`docs/huisstijl.md`. It is not this website's to change. The mark, the
-lockups, the nine colour tokens with their measured contrast claims, the type
-scale and the 4 px grid come from there, and a page that needs something the
-house style does not carry is a question for the owner before it is a line of
-CSS.
+The visual identity is the owner's, set on 2026-09-17, and it is not this
+website's to change. `docs/huisstijl.md` records what this site uses of it.
+The mark, the lockup, the nine colour tokens with their measured contrast
+claims, the type scale and the 4 px grid come from there, and a page that
+needs something the house style does not carry is a question for the owner
+before it is a line of CSS.
 
-- `assets/brand/tokens.css` is the one colour source. A page never writes a
-  hex value; it uses a `--huisstijl-*` token.
+- `sass/_huisstijl-tokens.scss` is the one colour source. A rule never writes
+  a hex value; it uses a `--huisstijl-*` token, through the role variables the
+  stylesheet defines once.
 - `scripts/checks/brand-contrast.sh` measures every token against the two
   grounds and fails when a `safe:` claim no longer holds. WCAG 2.2 asks 4.5:1
   for body text and 3:1 for a graphic (<https://www.w3.org/TR/WCAG22/#contrast-minimum>).
-- Inter is the one typeface, vendored under `assets/fonts/inter/` with its SIL
-  Open Font License 1.1, served as the two variable woff2 files from this
-  site's own origin. No font is fetched from a third party.
+- Inter is the one typeface, vendored under `static/fonts/inter/` with its SIL
+  Open Font License 1.1 and a `SHA256SUMS` beside it, served as the two
+  variable woff2 files from this site's own origin. No font, and no other
+  file, is fetched from a third party.
 - Only the Vernum Projecten and the shared `huisstijl-*` files are in this
   tree. No file named after another company is copied in.
 
@@ -87,14 +88,14 @@ rest stays out.
 - `templates/`: the Tera templates. `base.html` is the shell, `index.html`
   and `page.html` the two page shapes, `partials/` the header, the footer and
   the lockup.
-- `sass/`: the one stylesheet, compiled by Zola to `/site.css`. It imports
-  the house style tokens and the font faces.
+- `sass/`: the one stylesheet, compiled by Zola to `/site.css`, plus the house
+  style palette and font faces as two partials. There is one copy of each
+  file, so nothing can drift against a second one.
 - `static/`: what is copied verbatim: the brand files, the favicons, the
-  vendored Inter woff2 files, `CNAME`.
-- `assets/`: the house style as it came from the owner (`brand/`, `fonts/`),
-  unmodified. `static/` serves copies; `assets/` is the source of record.
-- `docs/`: `VERSIONS.md` (the pin matrix every other file follows) and
-  `huisstijl.md` (the house style).
+  vendored Inter woff2 files with their licence and checksums, `CNAME`.
+- `docs/`: `VERSIONS.md` (the pin matrix every other file follows),
+  `huisstijl.md` (the house style) and `publiceren.md` (how the site reaches
+  the domain, and how the repository is configured).
 - `scripts/checks/`: the committed guards. `prose-style.sh`, `versions.sh`,
   `brand-contrast.sh`, `company-name.sh`.
 - `scripts/gh/`: `fields.sh`, which sets the organisation's native issue type,
@@ -160,6 +161,10 @@ Branch from `origin/HEAD` with a conventional type (`feat/`, `fix/`,
   zola check
   actionlint && zizmor --min-severity=low .github/ && shellcheck --severity=style scripts/checks/*.sh
   ```
+
+  CI runs `zola check --skip-external-links`, so an outside site that answers
+  slowly cannot fail a build. Run it without that flag locally whenever you
+  add or change a link.
 
 ## Licence
 

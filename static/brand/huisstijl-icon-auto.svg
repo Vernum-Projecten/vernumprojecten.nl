@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 64 64" role="img" aria-label="Vernum Projecten B.V.">
+  <!-- Huisstijl; de regels staan in docs/huisstijl.md. -->
+  <style>.tile{fill:#1E5A44}.arm{stroke:#F5F4EF}.dot{fill:#D9B44A}@media (prefers-color-scheme: dark){.tile{fill:#F5F4EF}.arm{stroke:#1E5A44}.dot{fill:#A67C1F}}</style>
+  <rect x="2" y="2" width="60" height="60" rx="12" class="tile"/>
+  <path d="M18,16 L28.6,39 M46,16 L35.4,39" fill="none" class="arm" stroke-width="6.5" stroke-linecap="round"/>
+  <circle cx="32" cy="47.5" r="5.2" class="dot"/>
+</svg>

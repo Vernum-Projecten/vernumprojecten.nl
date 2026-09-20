@@ -14,8 +14,9 @@
 #                        .github/workflows/ci.yml uses.
 #   3. the domain        config.toml base_url, static/CNAME and the matrix row
 #                        all name the same host.
-#   4. the typeface      assets/fonts/inter/PROVENANCE.md names the pin the
-#                        matrix records.
+#   4. the typeface      static/fonts/inter/PROVENANCE.md names the pin the
+#                        matrix records, and SHA256SUMS still matches the
+#                        vendored files.
 #   5. licence           LICENSE is the Apache License 2.0 and no first-party
 #                        file claims another licence.
 #
@@ -158,16 +159,27 @@ else
   note "no static/CNAME yet, skipped"
 fi
 
-echo "== the typeface (assets/fonts/inter/PROVENANCE.md <-> docs/VERSIONS.md)"
+echo "== the typeface (static/fonts/inter/ <-> docs/VERSIONS.md)"
 want_inter="$(pin_of "Inter" docs/VERSIONS.md)"
 if [ -z "$want_inter" ]; then
   bad "docs/VERSIONS.md has no 'Inter' row"
-elif [ ! -f assets/fonts/inter/PROVENANCE.md ]; then
-  note "no assets/fonts/inter/PROVENANCE.md yet, skipped"
-elif ! /usr/bin/grep -qF "$want_inter" assets/fonts/inter/PROVENANCE.md; then
-  bad "assets/fonts/inter/PROVENANCE.md does not name the pin $want_inter"
+elif [ ! -f static/fonts/inter/PROVENANCE.md ]; then
+  note "no static/fonts/inter/PROVENANCE.md yet, skipped"
+elif ! /usr/bin/grep -qF "$want_inter" static/fonts/inter/PROVENANCE.md; then
+  bad "static/fonts/inter/PROVENANCE.md does not name the pin $want_inter"
 else
   note "OK: Inter $want_inter"
+fi
+# The vendored tree against its own checksums, so a font file that was
+# replaced or truncated is caught here and not by a reader of the site.
+if [ -f static/fonts/inter/SHA256SUMS ]; then
+  if (cd static/fonts/inter && shasum -a 256 -c SHA256SUMS >/dev/null 2>&1); then
+    note "OK: the vendored Inter files match SHA256SUMS"
+  else
+    bad "static/fonts/inter/ does not match its own SHA256SUMS"
+  fi
+else
+  note "no static/fonts/inter/SHA256SUMS yet, skipped"
 fi
 
 echo "== licence (LICENSE <-> SPDX headers)"
@@ -186,8 +198,8 @@ if [ -f LICENSE ]; then
     bad "licence claim other than Apache-2.0 at $hit"
     stale=1
   done < <(git grep -n -E '^[[:space:]]*([/#*]+|<!--)?[[:space:]]*SPDX-License-Identifier:' \
-    -- ':!LICENSE' ':!scripts/checks/versions.sh' ':(glob,exclude)assets/fonts/**' \
-    ':(glob,exclude)static/fonts/**' | grep -v 'SPDX-License-Identifier: Apache-2\.0' || true)
+    -- ':!LICENSE' ':!scripts/checks/versions.sh' ':(glob,exclude)static/fonts/**' \
+    | grep -v 'SPDX-License-Identifier: Apache-2\.0' || true)
   [ "$stale" -eq 0 ] && note "OK: LICENSE is the Apache License 2.0 and every first-party file names Apache-2.0"
 else
   note "no LICENSE yet, skipped"

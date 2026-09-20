@@ -1,0 +1,19 @@
+{# SPDX-FileCopyrightText: Vernum Projecten B.V. #}
+{# SPDX-License-Identifier: Apache-2.0 #}
+{#
+  De vorm van elke gewone pagina: een kop met de titel en de korte
+  omschrijving eronder, dan de tekst uit het markdownbestand.
+#}
+{% extends "base.html" %}
+
+{% block inhoud %}
+<div class="tekstkolom">
+  <header class="paginakop">
+    <h1>{{ page.title }}</h1>
+    {%- if page.description %}
+    <p class="inleiding">{{ page.description }}</p>
+    {%- endif %}
+  </header>
+  {{ page.content | safe }}
+</div>
+{% endblock inhoud %}

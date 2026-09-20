@@ -1,0 +1,80 @@
+# SPDX-FileCopyrightText: Vernum Projecten B.V.
+# SPDX-License-Identifier: Apache-2.0
+
+# De configuratie van Zola voor vernumprojecten.nl. De sleutels zijn die van
+# Zola zelf (https://www.getzola.org/documentation/getting-started/configuration/);
+# wat wij er zelf bij zetten staat onder [extra] en is Nederlands.
+
+base_url = "https://vernumprojecten.nl"
+title = "Vernum Projecten B.V."
+description = "Vernum Projecten B.V. bouwt software, voert IT-projecten uit en adviseert over techniek. Eén bedrijf in Groningen, één aanspreekpunt."
+default_language = "nl"
+author = "Vernum Projecten B.V."
+
+# De Sass in sass/ wordt gecompileerd naar /site.css.
+compile_sass = true
+
+# Geen zoekindex: die zou een JSON-bestand van een paar honderd kilobyte
+# toevoegen dat alleen met JavaScript te gebruiken is, en de site heeft vijf
+# pagina's.
+build_search_index = false
+
+# Geen feed: er is geen blog en er verschijnt niets met een datum.
+generate_feeds = false
+
+# Geen taxonomieën: er zijn geen tags en geen categorieën.
+taxonomies = []
+
+generate_sitemap = true
+generate_robots_txt = true
+
+# De uitvoer wordt geminificeerd. Dat scheelt ongeveer een vijfde aan bytes en
+# verandert niets aan wat er staat.
+minify_html = true
+
+[markdown]
+# Er staan geen codeblokken op de site, dus de markeerder blijft uit. Dat is
+# de standaard van Zola en staat hier niet als sleutel, omdat een sleutel op
+# zijn standaardwaarde alleen maar kan gaan afwijken.
+#
+# Nederlandse aanhalingstekens en een echt gedachtestreepje laten we liever
+# met de hand zetten dan door een vervanger; de schrijfstijl verbiedt het
+# gedachtestreepje als lijm tussen bijzinnen (.claude/rules/writing-style.md).
+smart_punctuation = false
+
+[link_checker]
+# `zola check` volgt elke externe link. Een 429 van een overheidssite tijdens
+# een CI-run zegt niets over de link, dus die wordt niet als fout geteld.
+skip_anchor_prefixes = ["https://wetten.overheid.nl/"]
+
+[extra]
+bedrijf = "Vernum Projecten B.V."
+plaats = "Groningen"
+jaar = "2026"
+kvk = "42164990"
+btw = "NL869998894B01"
+email = "info@vernumprojecten.nl"
+
+[[extra.navigatie]]
+pad = "/diensten/"
+naam = "Diensten"
+
+[[extra.navigatie]]
+pad = "/werkwijze/"
+naam = "Werkwijze"
+
+[[extra.navigatie]]
+pad = "/over/"
+naam = "Over"
+
+[[extra.navigatie]]
+pad = "/contact/"
+naam = "Contact"
+
+[[extra.voetlinks]]
+pad = "/contact/"
+naam = "Contact"
+
+[[extra.voetlinks]]
+pad = "/privacy/"
+naam = "Privacy"

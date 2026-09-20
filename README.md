@@ -38,6 +38,11 @@ scripts/checks/brand-contrast.sh         # elk kleurtoken haalt zijn WCAG-claim
 scripts/checks/company-name.sh --all     # het bedrijf voluit, en geen tweede
 ```
 
+`zola check` volgt ook elke externe link. In CI draait hij met
+`--skip-external-links`, zodat een site die even traag antwoordt geen bouw
+laat omvallen; lokaal draai je hem zonder die vlag als je een link hebt
+toegevoegd of gewijzigd.
+
 ## Hoe de site gepubliceerd wordt
 
 Een push naar `main` start `.github/workflows/pages.yml`. Die haalt Zola op,
@@ -46,30 +51,9 @@ via GitHub Pages online. De bron van Pages staat op "GitHub Actions", dus er
 is geen tak die uit zichzelf iets uitlevert, en er staat geen gebouwde site in
 de repository. Terug van een verkeerde pagina is de volgende commit.
 
-## Wat de eigenaar zelf instelt
-
-**DNS bij de registrar.** GitHub Pages bedient het domein pas als de records
-ernaar wijzen. Voor `vernumprojecten.nl`:
-
-| Type | Naam | Waarde |
-| --- | --- | --- |
-| A | `@` | `185.199.108.153` |
-| A | `@` | `185.199.109.153` |
-| A | `@` | `185.199.110.153` |
-| A | `@` | `185.199.111.153` |
-| AAAA | `@` | `2606:50c0:8000::153` |
-| AAAA | `@` | `2606:50c0:8001::153` |
-| AAAA | `@` | `2606:50c0:8002::153` |
-| AAAA | `@` | `2606:50c0:8003::153` |
-| CNAME | `www` | `vernum-projecten.github.io` |
-
-Deze adressen zijn op 2026-09-20 gelezen op
-[docs.github.com](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
-Lees ze opnieuw op de dag dat je ze invoert; GitHub kan ze veranderen.
-
-**HTTPS afdwingen.** Zodra de records zijn doorgegeven en GitHub een
-certificaat heeft uitgegeven, zet je in Settings, Pages het vinkje "Enforce
-HTTPS" aan. Tot dat certificaat er is, is het vinkje grijs.
+Het domein, het certificaat en de Pages-instellingen staan vast; wat er
+precies staat en hoe je het naleest, staat in
+[`docs/publiceren.md`](docs/publiceren.md).
 
 ## Wat de wet op deze site vraagt
 
@@ -95,10 +79,9 @@ bedrag uit een overeenkomst, geen bankgegeven, geen factuur.
 | `config.toml` | de configuratie van Zola, in het Nederlands |
 | `content/` | de pagina's als markdown |
 | `templates/` | de Tera-sjablonen: de schil, de twee paginavormen, de onderdelen |
-| `sass/` | de ene stylesheet, die de kleurtokens en de lettertypen inleest |
+| `sass/` | de ene stylesheet, plus het palet en de lettertypen van de huisstijl |
 | `static/` | wat ongewijzigd meegaat: merkbestanden, favicons, de webfonts, `CNAME` |
-| `assets/` | de huisstijl zoals de eigenaar die vaststelde, de bron van `static/` |
-| `docs/` | de versiematrix en de huisstijl |
+| `docs/` | de versiematrix, de huisstijl en hoe er gepubliceerd wordt |
 | `scripts/checks/` | de controles die per bewerking en in CI draaien |
 | `.github/workflows/` | `ci.yml` (de controles) en `pages.yml` (bouwen en publiceren) |
 

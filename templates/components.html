@@ -1,0 +1,20 @@
+{# SPDX-FileCopyrightText: Vernum Projecten B.V. #}
+{# SPDX-License-Identifier: Apache-2.0 #}
+{#
+  De Tera-componenten die de markdown in content/ mag aanroepen. Zola 0.23
+  kent geen shortcodes meer; een component wordt hier gedefinieerd en in een
+  pagina aangeroepen als een zelfsluitend element tussen dubbele accolades
+  (https://www.getzola.org/documentation/content/overview/).
+
+  Er is er één, en dat is met opzet: hoe meer een pagina kan aanroepen, hoe
+  minder de tekst leesbaar blijft in het bestand zelf.
+#}
+{#
+  hoofdlink: de ene link die op een pagina telt, met de gouden lijn eronder.
+  Goud haalt op de lichte ondergrond 3,45:1, genoeg voor een grafisch element
+  en niet voor tekst (docs/huisstijl.md, sectie 4), dus het draagt alleen de
+  lijn en de tekst blijft de merkkleur.
+#}
+{% component hoofdlink(pad: string, tekst: string) -%}
+<a class="hoofdlink" href="{{ get_url(path=pad) }}">{{ tekst }}</a>
+{%- endcomponent %}
