@@ -4,7 +4,7 @@
 company in Groningen. Three services, set by the owner on 2026-09-20:
 IT consulting, software design, and software development. Management and
 maintenance are not offered; a project ends with a handover, and what runs the
-software after that is the client's choice. The site is five pages and a 404,
+software after that is the client's choice. The site is six pages and a 404,
 built by Zola from Tera templates and Dutch markdown, published on GitHub
 Pages at
 <https://vernumprojecten.nl>. It carries no JavaScript, no cookies, no
