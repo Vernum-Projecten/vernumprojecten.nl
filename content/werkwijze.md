@@ -1,56 +1,67 @@
 +++
 title = "Werkwijze"
-description = "Van intake tot overdracht: wat er in elke stap gebeurt, wat je te zien krijgt en wat je aan het eind in handen hebt."
+description = "Van het eerste gesprek tot de overdracht: wat er in elke stap gebeurt, wat u te zien krijgt en wat u aan het eind in handen heeft."
 template = "page.html"
 weight = 2
 insert_anchor_links = "none"
 +++
 
-## Intake
+## Het eerste gesprek
 
-Het eerste gesprek gaat over wat er nu gebeurt en wat er zou moeten gebeuren.
-Wij stellen vragen tot we jouw proces kunnen navertellen. Daarna schrijven we
-op wat we begrepen hebben en sturen je dat toe. Klopt het niet, dan weet je
-dat nu en niet na drie maanden.
+Het gesprek gaat over wat er nu gebeurt en wat er zou moeten gebeuren. Wij
+stellen vragen tot wij uw proces kunnen navertellen. Daarna schrijven wij op
+wat wij begrepen hebben en sturen u dat toe. Klopt het niet, dan weet u dat
+voordat er iets gebouwd is.
 
-Is de opdracht te groot om in één gesprek te overzien, dan stellen we een
-vooranalyse voor: een paar dagen lezen en praten met de mensen die met het
-systeem werken. Het resultaat is een geschreven verslag, dat van jou is ook
-als je daarna met een ander verder gaat.
+Is de opdracht te groot om in één gesprek te overzien, dan stellen wij een
+vooranalyse voor: lezen in de systemen die er staan en praten met de mensen
+die ermee werken. Het resultaat is een geschreven verslag, en dat is van u,
+ook als u daarna met een ander verdergaat.
 
-## Offerte
+## Het ontwerp en het plan
 
-In de offerte staat wat er gebouwd wordt en wat er uitdrukkelijk niet in zit.
-Die tweede lijst is er niet om ons in te dekken; hij bestaat omdat de meeste
-ruzies over software gaan over iets waarvan de één dacht dat het erbij hoorde.
+Wat gebouwd wordt, ligt eerst op papier: welke gegevens het systeem bijhoudt,
+wat er gebeurt met elk geval dat afwijkt, uit welke onderdelen het bestaat en
+waar het aan koppelt. Ligt er al een ontwerp, van u of van een andere partij,
+dan lezen wij dat en zeggen wij wat eraan ontbreekt.
 
-Er staat ook in wat het kost, hoe er gefactureerd wordt en wanneer het af kan
-zijn. Wat onderweg niet blijkt te kunnen, hoor je op het moment dat het
-blijkt.
+In het plan daarnaast staat wat er gebouwd wordt en wat er uitdrukkelijk niet
+in zit. Die tweede lijst bestaat omdat de meeste ruzies over software gaan
+over iets waarvan de één dacht dat het erbij hoorde.
 
-## Bouwen in korte stappen
+Er staat ook in wat het kost en hoe er gefactureerd wordt. De prijs spreken
+wij vooraf af, per stap of per uur. Wijzigt er onderweg iets aan wat er
+gebouwd wordt, dan leggen wij die wijziging en wat zij kost schriftelijk vast
+voordat er aan begonnen wordt.
+
+## Bouwen in stappen
 
 Er wordt in korte stappen gebouwd. Aan het eind van elke stap staat er iets
-dat werkt, op een omgeving waar je zelf bij kunt. Je ziet dus al vroeg waar je
-geld heen gaat, en je kunt van mening veranderen voordat het duur wordt.
+dat werkt, op een omgeving waar u zelf bij kunt. U ziet dus vroeg waar uw geld
+heen gaat, en u kunt van mening veranderen voordat het duur wordt.
 
-Bij elke stap hoort een bericht van een paar regels: wat af is, wat er
-tegenviel, en wat de volgende stap wordt. Extra werk wordt pas gedaan nadat je
-er ja op hebt gezegd.
+Bij elke stap hoort een bericht van een paar regels: wat af is, wat tegenviel,
+en wat de volgende stap wordt. Wat onderweg niet blijkt te kunnen, hoort u op
+het moment dat het blijkt.
 
-Wat opgeleverd wordt is getest. Waar het kan met tests die vanzelf draaien bij
-elke wijziging, en altijd met een ronde waarin jij het zelf probeert voordat
-het live gaat.
+## Testen en in gebruik nemen
+
+Wat opgeleverd wordt, is getest. Waar het kan met tests die vanzelf draaien
+bij elke wijziging, en altijd met een ronde waarin u het zelf probeert. Wat in
+die ronde naar voren komt, lossen wij op voordat de software in gebruik gaat.
+
+Bij de ingebruikname hoort een afspraak over het moment, over wie erbij is en
+over hoe u terugkunt naar de oude situatie als het misgaat.
 
 ## Overdracht
 
-Bij de oplevering krijg je de broncode en de rechten erop, en de documentatie
-om het te draaien: installeren, instellen, waar de gegevens staan, en hoe je
-een back-up terugzet. De maat voor die documentatie is of een ontwikkelaar die
-er niet bij was ermee verder kan.
+Bij de oplevering krijgt u de broncode en de rechten erop, en de documentatie
+om de software te draaien: installeren, instellen, waar de gegevens staan, en
+hoe u een back-up terugzet. De maat voor die documentatie is of een
+ontwikkelaar die er niet bij was ermee verder kan.
 
-Wil je daarna onderhoud, dan spreken we dat apart af. Wil je het zelf doen of
-met een andere partij, dan werken we mee aan de overdracht. Je zit nergens aan
-vast doordat de kennis bij ons is gebleven.
+Daarmee eindigt de opdracht. Beheer en onderhoud nemen wij niet aan, dus wie
+de software daarna draait, bepaalt u zelf: uw eigen mensen of een partij van
+uw keuze. De overdracht is daarop ingericht.
 
 {{ <hoofdlink pad="@/contact.md" tekst="Plan een eerste gesprek" /> }}

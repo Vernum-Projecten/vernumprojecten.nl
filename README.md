@@ -4,7 +4,7 @@
 # vernumprojecten.nl
 
 De website van Vernum Projecten B.V., een IT-bedrijf in Groningen:
-softwareontwikkeling, IT-projecten en integratie, en advies. De site staat op
+IT-advies, softwareontwerp en softwareontwikkeling. De site staat op
 <https://vernumprojecten.nl> en telt vijf pagina's plus een 404.
 
 De site is statisch. Er draait geen server van ons, er staat geen JavaScript
