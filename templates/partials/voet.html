@@ -3,17 +3,20 @@
 {#
   De voet draagt wat artikel 3:15d BW en artikel 27 Handelsregisterwet 2007
   op elke pagina laten staan: de naam, de plaats, het KVK-nummer en het
-  btw-identificatienummer. De contactpagina herhaalt ze voluit met het adres
-  en het e-mailadres erbij.
+  btw-identificatienummer. Elk gegeven staat op een eigen regel, want als één
+  zin breekt hij op een smal scherm midden in een nummer af. De contactpagina
+  noemt ze nog een keer, met het volledige label erbij.
 #}
 <footer class="voet">
   <div class="schil voet__binnen">
-    <div>
-      <p>
-        <strong>{{ config.extra.bedrijf }}</strong>, {{ config.extra.plaats }}.
-        KVK {{ config.extra.kvk }}. Btw-id {{ config.extra.btw }}.
-      </p>
-      <p>&copy; {{ config.extra.jaar }} {{ config.extra.bedrijf }}</p>
+    <div class="voet__gegevens">
+      <ul class="voet__feiten">
+        <li><strong>{{ config.extra.bedrijf }}</strong></li>
+        <li>{{ config.extra.plaats }}</li>
+        <li>KVK {{ config.extra.kvk }}</li>
+        <li>Btw {{ config.extra.btw }}</li>
+      </ul>
+      <p class="voet__rechten">&copy; {{ config.extra.jaar }} {{ config.extra.bedrijf }}</p>
     </div>
     <ul class="voet__links">
       {%- for item in config.extra.voetlinks %}

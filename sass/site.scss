@@ -4,31 +4,52 @@
  * De ene stylesheet van vernumprojecten.nl. Zola compileert dit bestand naar
  * /site.css; er is geen tweede bouwgereedschap en geen JavaScript.
  *
+ * De opzet is mobile-first: de regels hieronder zijn de telefoon, en wat een
+ * breder scherm extra krijgt staat in een `min-width`-blok bij het onderdeel
+ * zelf. De breekpunten zijn 40 rem, 48 rem en 60 rem.
+ *
  * De kleuren, het lettertype, de typeschaal en het raster komen uit de
- * huisstijl (docs/huisstijl.md): basiseenheid 4 px, afstanden uit 8, 12, 16,
- * 24, 32 en 48, hoekradius 6, geen schaduwen. Scheiding komt van ruimte en
- * van één zilveren lijn. Waar een pagina meer lucht vraagt dan 48 px,
- * gebruikt zij 64 of 96: veelvouden van dezelfde eenheid. Geen specificatie
+ * huisstijl (docs/huisstijl.md): basiseenheid 4 px, hoekradius 6, geen
+ * schaduwen, scheiding uit ruimte en uit één zilveren lijn. Geen specificatie
  * schrijft dat voor; het is eigen ontwerp op de maat die de huisstijl geeft.
  *
  * De toegankelijkheidseis is WCAG 2.2 op niveau AA
  * (https://www.w3.org/TR/WCAG22/): 4,5:1 voor lopende tekst, 3:1 voor een
- * grafisch element, een zichtbare focus, en een pagina die op 320 px breed
- * leesbaar blijft zonder horizontaal te schuiven. */
+ * grafisch element, een zichtbare focus, een raakvlak van 44 bij 44 px, en
+ * een pagina die op 320 px breed leesbaar blijft zonder horizontaal te
+ * schuiven. */
 
 @import "huisstijl-tokens";
 @import "huisstijl-fonts";
 
 // De rollen die de pagina gebruikt, uitgedrukt in de merktokens. Het donkere
-// thema wisselt alleen deze rollen om; geen regel hieronder noemt een tweede
-// kleur (docs/huisstijl.md, sectie 4).
-:root {
+// thema wisselt alleen deze rollen om; geen regel verderop noemt een tweede
+// kleur (docs/huisstijl.md, sectie 4). De bandtint is een menging van twee
+// tokens, dus er komt geen tiende kleur bij.
+@mixin thema-licht {
   --grond: var(--huisstijl-mist);
+  --grond-band: #{mix(#1e5a44, #f5f4ef, 5%)};
   --tekst: var(--huisstijl-inkt);
   --merk: var(--huisstijl-loof);
+  --merk-tekst: var(--huisstijl-mist);
   --gedempt: var(--huisstijl-leisteen);
   --lijn: var(--huisstijl-zilver);
   --accent: var(--huisstijl-goud);
+}
+
+@mixin thema-donker {
+  --grond: var(--huisstijl-inkt);
+  --grond-band: #{mix(#7fbf9e, #15201b, 7%)};
+  --tekst: var(--huisstijl-mist);
+  --merk: var(--huisstijl-blad);
+  --merk-tekst: var(--huisstijl-inkt);
+  --gedempt: var(--huisstijl-nevel);
+  --lijn: rgba(167, 177, 171, 0.3);
+  --accent: var(--huisstijl-goud-licht);
+}
+
+:root {
+  @include thema-licht;
 
   --ruimte-1: 0.5rem;
   --ruimte-2: 0.75rem;
@@ -39,25 +60,38 @@
   --ruimte-7: 4rem;
   --ruimte-8: 6rem;
 
-  // De schil is net iets breder dan de tekstkolom, zodat de kop, de tekst en
-  // de voet dezelfde linker- en rechterrand delen. Een bredere schil zet de
-  // navigatie ver rechts van een tekst die op 36 rem ophoudt, en dat leest
-  // als een pagina die half leeg is.
-  --breedte-schil: 42rem;
+  // De schil draagt de brede blokken; de tekstkolom houdt lopende tekst
+  // onder de 72 tekens per regel die de huisstijl vraagt (sectie 5).
+  --breedte-schil: 66rem;
   --breedte-tekst: 36rem;
+
+  // De typeschaal schaalt mee met het venster. De ondergrens is de telefoon,
+  // de bovengrens de maat uit de huisstijl (sectie 5).
+  --tekstmaat: 1.0625rem;
+  --maat-h1: clamp(1.875rem, 1.35rem + 2.6vw, 3rem);
+  --maat-h2: clamp(1.375rem, 1.15rem + 1.1vw, 1.75rem);
+  --maat-h3: clamp(1.125rem, 1.05rem + 0.4vw, 1.25rem);
+  --maat-inleiding: clamp(1.125rem, 1.05rem + 0.5vw, 1.3125rem);
 
   color-scheme: light dark;
 }
 
+// Licht is de standaard; donker volgt de instelling van het apparaat. Er is
+// geen schakelaar, want de site draait geen JavaScript. Het attribuut
+// `data-thema` bestaat zodat een schermafdruk beide thema's kan tonen op een
+// machine die er maar één heeft ingesteld; geen pagina zet het.
 @media (prefers-color-scheme: dark) {
   :root {
-    --grond: var(--huisstijl-inkt);
-    --tekst: var(--huisstijl-mist);
-    --merk: var(--huisstijl-blad);
-    --gedempt: var(--huisstijl-nevel);
-    --lijn: rgba(167, 177, 171, 0.3);
-    --accent: var(--huisstijl-goud-licht);
+    @include thema-donker;
   }
+}
+
+:root[data-thema="donker"] {
+  @include thema-donker;
+}
+
+:root[data-thema="licht"] {
+  @include thema-licht;
 }
 
 *,
@@ -76,10 +110,10 @@ body {
   background: var(--grond);
   color: var(--tekst);
   font-family: "Inter", system-ui, sans-serif;
-  font-size: 1rem;
+  font-size: var(--tekstmaat);
   line-height: 1.65;
-  // Geen horizontale schuifbalk op een smal scherm, wat er ook in een tabel
-  // of een lange URL staat.
+  // Geen horizontale schuifbalk op een smal scherm, wat er ook in een lange
+  // URL of een lang woord staat.
   overflow-wrap: break-word;
 }
 
@@ -91,9 +125,13 @@ body {
   padding-inline: var(--ruimte-3);
 }
 
-// Lopende tekst blijft onder 72 tekens per regel (huisstijl, sectie 5).
 .tekstkolom {
   max-width: var(--breedte-tekst);
+}
+
+img,
+svg {
+  max-width: 100%;
 }
 
 // Typografie -----------------------------------------------------------------
@@ -103,23 +141,32 @@ h2,
 h3 {
   color: var(--merk);
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 1.2;
   margin: 0 0 var(--ruimte-3);
   text-wrap: balance;
 }
 
 h1 {
-  font-size: 2rem;
-  letter-spacing: -0.01em;
+  font-size: var(--maat-h1);
+  letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: 1.5rem;
-  margin-top: var(--ruimte-6);
+  font-size: var(--maat-h2);
+  letter-spacing: -0.01em;
 }
 
 h3 {
-  font-size: 1.25rem;
+  font-size: var(--maat-h3);
+}
+
+// Binnen een lopende tekst opent een `h2` een nieuwe sectie. De ruimte
+// erboven is de scheiding; er komt geen lijn en geen kader omheen.
+.tekstkolom h2 {
+  margin-top: var(--ruimte-7);
+}
+
+.tekstkolom h3 {
   margin-top: var(--ruimte-5);
 }
 
@@ -130,12 +177,15 @@ dl {
   margin: 0 0 var(--ruimte-4);
 }
 
-ul,
-ol {
+.tekstkolom ul,
+.tekstkolom ol {
   padding-left: 1.25rem;
 }
 
-li + li {
+// Alleen in lopende tekst staan twee opsommingsregels los van elkaar. Een
+// lijst die een raster is (de diensten, de stappen, de voetlinks) krijgt zijn
+// ruimte van dat raster, en een marge erbovenop zet de items uit de lijn.
+.tekstkolom li + li {
   margin-top: var(--ruimte-1);
 }
 
@@ -146,7 +196,7 @@ strong {
 // Het label in kapitalen: 12 px, letterafstand 0,04 em (huisstijl, sectie 5).
 .label {
   display: block;
-  margin-bottom: var(--ruimte-1);
+  margin-bottom: var(--ruimte-2);
   color: var(--gedempt);
   font-size: 0.75rem;
   font-weight: 500;
@@ -155,7 +205,7 @@ strong {
 }
 
 .inleiding {
-  font-size: 1.125rem;
+  font-size: var(--maat-inleiding);
   color: var(--tekst);
 }
 
@@ -164,7 +214,7 @@ strong {
   font-size: 0.875rem;
 }
 
-// Links ----------------------------------------------------------------------
+// Links en acties ------------------------------------------------------------
 
 a {
   color: var(--merk);
@@ -176,17 +226,43 @@ a:hover {
   text-decoration-thickness: 2px;
 }
 
-// De ene link die op een pagina telt. Goud is het accent van de huisstijl en
-// mag geen tekstkleur zijn op licht (3,45:1), dus het draagt alleen de lijn
-// eronder; de tekst blijft de merkkleur.
+// De ene actie die op een pagina telt: gevuld met de merkkleur, met de
+// tekstkleur die daarop 7,33:1 haalt op licht en 7,85:1 op donker (gemeten
+// 20-09-2026 met de waarden uit docs/huisstijl.md, sectie 4).
+.knop {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ruimte-2);
+  min-height: 44px;
+  padding: var(--ruimte-2) var(--ruimte-4);
+  border-radius: 6px;
+  background: var(--merk);
+  color: var(--merk-tekst);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.knop:hover {
+  background: var(--tekst);
+  color: var(--grond);
+}
+
+// De link die een blok afsluit en verder wijst. Goud haalt 3,45:1 op de
+// lichte ondergrond en 3,19:1 op de band: genoeg voor een lijn en nooit voor
+// tekst, dus de tekst blijft de merkkleur.
+.verderlink,
 .hoofdlink {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ruimte-1);
+  min-height: 44px;
   font-weight: 600;
   text-decoration: none;
   border-bottom: 2px solid var(--accent);
   padding-bottom: 2px;
 }
 
+.verderlink:hover,
 .hoofdlink:hover {
   border-bottom-width: 3px;
   padding-bottom: 1px;
@@ -203,7 +279,7 @@ a:hover {
   position: absolute;
   left: -9999px;
   top: 0;
-  z-index: 1;
+  z-index: 2;
   padding: var(--ruimte-2) var(--ruimte-3);
   background: var(--grond);
   color: var(--merk);
@@ -216,9 +292,30 @@ a:hover {
   top: var(--ruimte-3);
 }
 
+// Pictogrammen ---------------------------------------------------------------
+
+.icoon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+}
+
+.icoon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.icoon--groot {
+  width: 32px;
+  height: 32px;
+  color: var(--merk);
+}
+
 // Kop ------------------------------------------------------------------------
 
 .kop {
+  position: relative;
   border-bottom: 1px solid var(--lijn);
 }
 
@@ -226,32 +323,70 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--ruimte-3) var(--ruimte-5);
-  padding-block: var(--ruimte-4);
+  justify-content: space-between;
+  gap: var(--ruimte-2);
+  padding-block: var(--ruimte-2);
 }
 
-.kop__merk {
+.merk {
   display: inline-flex;
-  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--ruimte-2);
+  min-height: 44px;
+  color: var(--tekst);
+  text-decoration: none;
 }
 
-// De auto-lockup staat op 28 px hoog (huisstijl, sectie 6). De breedte volgt
-// uit de verhouding van het bestand, dus er wordt niets uitgerekt.
-.kop__lockup {
-  display: block;
-  height: 28px;
-  width: auto;
+.merk__teken {
+  width: 32px;
+  height: 32px;
 }
 
+.merk__naam {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+// Het menu op een smal scherm: een `details` die zonder JavaScript open en
+// dicht gaat. De knop is 44 px hoog, zodat een vinger hem raakt.
+.menu__knop {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ruimte-1);
+  min-height: 44px;
+  padding-inline: var(--ruimte-2);
+  color: var(--gedempt);
+  cursor: pointer;
+  list-style: none;
+}
+
+.menu__knop::-webkit-details-marker {
+  display: none;
+}
+
+.menu[open] .menu__knop {
+  color: var(--merk);
+}
+
+// Open staat het menu als een paneel over de volle breedte onder de kop, en
+// niet als een smalle kolom aan de rechterkant.
 .navigatie {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 1;
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--ruimte-2) var(--ruimte-4);
-  margin-left: auto;
-  font-size: 0.9375rem;
+  flex-direction: column;
+  padding: var(--ruimte-1) var(--ruimte-3) var(--ruimte-2);
+  background: var(--grond);
+  border-bottom: 1px solid var(--lijn);
 }
 
 .navigatie a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
   color: var(--gedempt);
   text-decoration: none;
 }
@@ -266,32 +401,317 @@ a:hover {
   font-weight: 500;
 }
 
+// Vanaf 40 rem past de navigatie naast het merk: de knop verdwijnt en de
+// links staan op één rij. Een gesloten `details` verbergt zijn inhoud, ook
+// als de `summary` weg is, dus `::details-content` wordt hier zichtbaar
+// gezet; dat is de haak die de HTML-standaard daarvoor geeft
+// (https://html.spec.whatwg.org/multipage/rendering.html#the-details-and-summary-elements).
+@media (min-width: 40rem) {
+  .menu__knop {
+    display: none;
+  }
+
+  .menu::details-content {
+    content-visibility: visible;
+    block-size: auto;
+  }
+
+  .menu > .navigatie {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    gap: var(--ruimte-4);
+    padding: 0;
+    background: none;
+    border-bottom: 0;
+  }
+}
+
 // Inhoud ---------------------------------------------------------------------
 
 .inhoud {
-  padding-block: var(--ruimte-7) var(--ruimte-8);
+  padding-block: var(--ruimte-5) var(--ruimte-7);
 }
 
 .paginakop {
   margin-bottom: var(--ruimte-6);
 }
 
-// Een blok met een lijn erboven: de enige scheiding die de huisstijl kent.
-.blok + .blok {
-  margin-top: var(--ruimte-6);
-  padding-top: var(--ruimte-6);
+// Een gewone pagina is één kolom: de titel, de inleiding en daaronder de
+// secties. Rustig is hier de opdracht (eigenaar, 20-09-2026), dus er staat
+// geen band, geen kader en geen pictogram omheen. Ruimte scheidt de secties,
+// en één lijn waar die ruimte alleen niet genoeg is.
+// De pagina is breder dan de tekstkolom (eigenaar, 20-09-2026: de pagina's
+// achter het menu waren te smal). De alinea's houden hun eigen maat, zodat
+// een regel niet te lang wordt om te lezen.
+.bladzijde {
+  max-width: calc(52rem + 2 * var(--ruimte-3));
+}
+
+.sectie > p,
+.sectie > ol,
+.sectie > ul,
+.bladzijde .tekstkolom {
+  max-width: 46rem;
+}
+
+.sectie {
+  margin-top: var(--ruimte-7);
+}
+
+.sectie h2 {
+  margin-bottom: var(--ruimte-3);
+}
+
+.sectie p:last-child {
+  margin-bottom: 0;
+}
+
+// Het portret: één afbeelding, op de breedte van de kolom en met dezelfde
+// hoekradius als de rest van de pagina.
+.foto {
+  margin: 0;
+}
+
+.foto img {
+  display: block;
+  width: 100%;
+  max-width: 22rem;
+  height: auto;
+  border-radius: 6px;
+}
+
+.paginablok p:last-child {
+  margin-bottom: 0;
+}
+
+.blok__voet {
+  margin-top: var(--ruimte-4);
+}
+
+@media (min-width: 48rem) {
+  .paginakop-blok {
+    padding-block: var(--ruimte-6) var(--ruimte-7);
+  }
+
+  .paginablok {
+    padding-block: var(--ruimte-7);
+  }
+}
+
+// De opening van de startpagina: de tekst met de actie, en het merkteken als
+// de ene afbeelding. Vanaf 48 rem staat het teken ernaast.
+.opening {
+  padding-block: var(--ruimte-4) var(--ruimte-6);
+}
+
+.opening__binnen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ruimte-6);
+  align-items: flex-start;
+}
+
+.opening__tekst {
+  max-width: 34rem;
+}
+
+.opening__tekst .inleiding {
+  margin-bottom: var(--ruimte-5);
+}
+
+.opening__teken {
+  width: clamp(96px, 28vw, 200px);
+  height: auto;
+  align-self: center;
+}
+
+@media (min-width: 48rem) {
+  .opening {
+    padding-block: var(--ruimte-7) var(--ruimte-8);
+  }
+
+  .opening__binnen {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ruimte-7);
+  }
+
+  .opening__teken {
+    align-self: auto;
+  }
+}
+
+// Een band: dezelfde schil, een rustige tint als ondergrond. Gemeten op
+// 20-09-2026: lopende tekst haalt er 14,06:1 op licht en 13,43:1 op donker,
+// gedempte tekst 5,12:1 en 6,70:1.
+.band {
+  background: var(--grond-band);
+  padding-block: var(--ruimte-7);
+}
+
+.stappenblok {
+  padding-block: var(--ruimte-7);
+}
+
+// De drie diensten: onder elkaar op een telefoon, naast elkaar vanaf 48 rem.
+.diensten {
+  display: grid;
+  gap: var(--ruimte-6);
+  grid-template-columns: 1fr;
+  list-style: none;
+  margin: 0 0 var(--ruimte-5);
+  padding: 0;
+}
+
+// Elk blok begint op dezelfde lijn, ook als het ene twee regels tekst heeft
+// en het andere vier: de lijn erboven geeft de drie dezelfde vorm.
+.dienst {
+  margin: 0;
+  max-width: 34rem;
+  padding-top: var(--ruimte-3);
   border-top: 1px solid var(--lijn);
 }
 
-.blok h2:first-child,
-.blok h3:first-child {
+.dienst h3 {
+  margin-top: var(--ruimte-3);
+  margin-bottom: var(--ruimte-1);
+}
+
+.dienst p {
+  margin: 0;
+}
+
+@media (min-width: 48rem) {
+  .diensten {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--ruimte-6) var(--ruimte-5);
+  }
+}
+
+// De vier stappen: een genummerde lijst waarin het nummer de maat geeft.
+.stappen {
+  display: grid;
+  gap: var(--ruimte-5);
+  grid-template-columns: 1fr;
+  list-style: none;
+  margin: 0 0 var(--ruimte-5);
+  padding: 0;
+}
+
+.stap {
+  margin: 0;
+  max-width: 34rem;
+  padding-top: var(--ruimte-3);
+  border-top: 1px solid var(--lijn);
+}
+
+// Op een pagina die alleen uit stappen bestaat staan ze onder elkaar, met
+// het nummer in de kantlijn ernaast zodra daar ruimte voor is.
+.stappen--lijst {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.stappen--lijst .stap {
+  margin: 0;
+  max-width: none;
+  padding-top: var(--ruimte-4);
+  margin-top: var(--ruimte-4);
+  border-top: 1px solid var(--lijn);
+}
+
+.stappen--lijst .stap:first-child {
   margin-top: 0;
 }
 
-// De gegevenslijst van de contactpagina: label links, waarde rechts, op een
-// smal scherm onder elkaar.
+.stappen--lijst .stap h3 {
+  margin-top: 0;
+  min-height: 0;
+}
+
+.stappen--lijst .stap p:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 40rem) {
+  .stappen--lijst .stap {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    column-gap: var(--ruimte-4);
+  }
+
+  .stappen--lijst .stap__nummer {
+    font-size: 1.5rem;
+  }
+}
+
+.stap__nummer {
+  margin: 0 0 var(--ruimte-1);
+  color: var(--merk);
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.stap h3 {
+  margin-bottom: var(--ruimte-1);
+}
+
+.stap p {
+  margin: 0;
+}
+
+// Staan de blokken naast elkaar, dan begint de tekst van alle vier op
+// dezelfde hoogte, ook als één titel over twee regels valt. Twee regels is
+// de maat die de langste titel nodig heeft.
+@media (min-width: 40rem) {
+  .stappen {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--ruimte-5) var(--ruimte-6);
+  }
+
+  .stap h3,
+  .dienst h3 {
+    min-height: 2.4em;
+  }
+}
+
+@media (min-width: 60rem) {
+  .stappen {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// Het slot: één zin en de actie.
+.slot__binnen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ruimte-4);
+  align-items: flex-start;
+}
+
+.slot p {
+  margin: 0;
+}
+
+@media (min-width: 48rem) {
+  .slot__binnen {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ruimte-6);
+  }
+}
+
+// De gegevenslijst van de contactpagina: op een telefoon staat elk label
+// boven zijn waarde, vanaf 40 rem ernaast.
 .gegevens {
-  margin: 0 0 var(--ruimte-4);
+  margin: 0 0 var(--ruimte-5);
+  max-width: 34rem;
 }
 
 .gegevens div {
@@ -306,10 +726,8 @@ a:hover {
   border-bottom: 1px solid var(--lijn);
 }
 
-// Breed genoeg voor het langste label, "Btw-identificatienummer", zodat geen
-// enkel label over twee regels valt naast een waarde van één regel.
 .gegevens dt {
-  flex: 0 0 11.5rem;
+  flex: 0 0 100%;
   color: var(--gedempt);
   font-size: 0.875rem;
 }
@@ -319,12 +737,11 @@ a:hover {
   font-variant-numeric: tabular-nums;
 }
 
-// Onder deze breedte past een lange waarde niet meer naast zijn label, en
-// dan valt de ene rij wel en de andere niet. Hieronder staat elk label boven
-// zijn waarde, zodat alle rijen dezelfde vorm hebben.
-@media (max-width: 34rem) {
+@media (min-width: 40rem) {
+  // Breed genoeg voor het langste label, "Btw-identificatienummer", zodat
+  // geen enkel label over twee regels valt naast een waarde van één regel.
   .gegevens dt {
-    flex: 0 0 100%;
+    flex: 0 0 11.5rem;
   }
 }
 
@@ -339,14 +756,28 @@ a:hover {
 
 .voet__binnen {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--ruimte-3) var(--ruimte-6);
-  justify-content: space-between;
+  flex-direction: column;
+  gap: var(--ruimte-3);
 }
 
-.voet p {
-  margin: 0 0 var(--ruimte-1);
-  max-width: 28rem;
+// De gegevens die de wet op elke pagina vraagt, elk op een eigen regel. Als
+// één lange zin breken ze op een smal scherm midden in een nummer af.
+.voet__feiten {
+  list-style: none;
+  margin: 0 0 var(--ruimte-2);
+  padding: 0;
+}
+
+.voet__feiten li {
+  margin: 0;
+}
+
+.voet__feiten strong {
+  color: var(--tekst);
+}
+
+.voet__rechten {
+  margin: 0;
 }
 
 .voet a {
@@ -360,10 +791,25 @@ a:hover {
 .voet__links {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--ruimte-1) var(--ruimte-3);
+  gap: 0 var(--ruimte-4);
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.voet__links a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+@media (min-width: 40rem) {
+  .voet__binnen {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--ruimte-4) var(--ruimte-6);
+  }
 }
 
 // Wie het zonder beweging wil, krijgt het zonder beweging.
@@ -387,5 +833,9 @@ a:hover {
   body {
     background: #fff;
     color: #000;
+  }
+
+  .band {
+    background: none;
   }
 }

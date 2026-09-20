@@ -9,16 +9,20 @@
 {% extends "base.html" %}
 
 {% block inhoud %}
-<div class="tekstkolom">
-  <header class="paginakop">
-    <p class="label">Foutmelding 404</p>
-    <h1>Deze pagina bestaat niet</h1>
-  </header>
-  <p>
-    Het adres dat u opvroeg staat niet op deze site.
-  </p>
-  <p>
-    <a class="hoofdlink" href="{{ get_url(path='@/_index.md') }}">Ga naar de startpagina</a>
-  </p>
+<div class="schil">
+  <div class="tekstkolom">
+    <header class="paginakop">
+      <p class="label">Foutmelding 404</p>
+      <h1>Deze pagina bestaat niet</h1>
+    </header>
+    <p>
+      Het adres dat u opvroeg staat niet op deze site.
+    </p>
+    <p>
+      <a class="knop" href="{{ get_url(path='@/_index.md') }}">
+        <span>Ga naar de startpagina</span>
+      </a>
+    </p>
+  </div>
 </div>
 {% endblock inhoud %}

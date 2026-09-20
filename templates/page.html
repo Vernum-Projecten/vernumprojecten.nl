@@ -1,19 +1,99 @@
 {# SPDX-FileCopyrightText: Vernum Projecten B.V. #}
 {# SPDX-License-Identifier: Apache-2.0 #}
 {#
-  De vorm van elke gewone pagina: een kop met de titel en de korte
-  omschrijving eronder, dan de tekst uit het markdownbestand.
+  De vorm van elke gewone pagina: een kopblok met de titel en de korte
+  omschrijving, dan de onderdelen van de pagina onder elkaar in één kolom.
+
+  Rustig is hier de opdracht (eigenaar, 20-09-2026): geen banden, geen kaders
+  en geen pictogrammen op deze pagina's. Wat een sectie van de volgende
+  scheidt, is ruimte en één lijn.
+
+  Een pagina die uit onderdelen bestaat (Diensten, Werkwijze, Over, Contact)
+  zet die als `extra.blokken` in haar front matter en dit sjabloon tekent ze:
+  `tekst`, `stappen`, `gegevens`, `foto` en `actie`. Een pagina met één
+  lopende tekst (Privacy, Voorwaarden) laat `extra.blokken` weg en levert haar
+  markdown aan.
 #}
 {% extends "base.html" %}
 
 {% block inhoud %}
-<div class="tekstkolom">
+<div class="schil bladzijde">
   <header class="paginakop">
     <h1>{{ page.title }}</h1>
     {%- if page.description %}
     <p class="inleiding">{{ page.description }}</p>
     {%- endif %}
   </header>
-  {{ page.content | safe }}
+
+  {%- if page.extra.blokken %}
+  {%- for blok in page.extra.blokken %}
+  <section class="sectie">
+    {%- if blok.kop %}
+    <h2>{{ blok.kop }}</h2>
+    {%- endif %}
+
+    {%- if blok.soort == "tekst" %}
+    {%- for alinea in blok.tekst %}
+    <p>{{ alinea | markdown(inline=true) | safe }}</p>
+    {%- endfor %}
+
+    {%- elif blok.soort == "foto" %}
+    <figure class="foto">
+      <img
+        src="{{ get_url(path=blok.pad) }}"
+        width="{{ blok.breedte }}"
+        height="{{ blok.hoogte }}"
+        alt="{{ blok.alt }}"
+        loading="lazy"
+      />
+    </figure>
+
+    {%- elif blok.soort == "stappen" %}
+    <ol class="stappen--lijst">
+      {%- for item in blok.items %}
+      <li class="stap">
+        <p class="stap__nummer" aria-hidden="true">{{ loop.index }}</p>
+        <div>
+          <h3>{{ item.titel }}</h3>
+          {%- for alinea in item.tekst %}
+          <p>{{ alinea | markdown(inline=true) | safe }}</p>
+          {%- endfor %}
+        </div>
+      </li>
+      {%- endfor %}
+    </ol>
+
+    {%- elif blok.soort == "gegevens" %}
+    <dl class="gegevens">
+      {%- for item in blok.items %}
+      <div>
+        <dt>{{ item.label }}</dt>
+        <dd>
+          {%- if item.href %}<a href="{{ item.href }}">{{ item.waarde }}</a>
+          {%- else %}{{ item.waarde }}{% endif %}
+        </dd>
+      </div>
+      {%- endfor %}
+    </dl>
+
+    {%- elif blok.soort == "actie" %}
+    {%- for alinea in blok.tekst %}
+    <p>{{ alinea | markdown(inline=true) | safe }}</p>
+    {%- endfor %}
+    <p>
+      <a class="knop" href="{% if blok.link_href %}{{ blok.link_href }}{% else %}{{ get_url(path=blok.pad) }}{% endif %}">
+        {{ <icoon naam="mail" /> }}
+        <span>{{ blok.link_tekst }}</span>
+      </a>
+    </p>
+    {%- endif %}
+  </section>
+  {%- endfor %}
+
+  {%- else %}
+  <div class="tekstkolom">
+    {{ page.content | safe }}
+  </div>
+  {%- endif %}
 </div>
 {% endblock inhoud %}

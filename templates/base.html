@@ -64,9 +64,7 @@
     <a class="overslaan" href="#inhoud">Naar de inhoud</a>
     {% include "partials/kop.html" %}
     <main id="inhoud" class="inhoud">
-      <div class="schil">
-        {% block inhoud %}{% endblock inhoud %}
-      </div>
+      {% block inhoud %}{% endblock inhoud %}
     </main>
     {% include "partials/voet.html" %}
   </body>

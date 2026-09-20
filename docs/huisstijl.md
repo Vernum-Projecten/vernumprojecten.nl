@@ -55,11 +55,16 @@ voor de `alt`-tekst die een schermlezer voorleest, en
 `scripts/checks/company-name.sh` weigert het losse woord in elk bestand van de
 boom.
 
-De site gebruikt één bestand: `static/brand/vernum-projecten-lockup-auto.svg`.
-Dat draagt de mediaquery voor het donkere thema in het bestand zelf, dus één
-bestand bedient beide thema's en er staat geen tweede afbeelding in de HTML.
-De maat: tegel 45 op een hoogte van 56, woordmerk op 30 px, 12 eenheden tussen
-tegel en woord. In de paginakop staat het op 28 px hoog.
+De lockup als afbeelding staat in
+`static/brand/vernum-projecten-lockup-auto.svg`, met de mediaquery voor het
+donkere thema in het bestand zelf. De maat: tegel 45 op een hoogte van 56,
+woordmerk op 30 px, 12 eenheden tussen tegel en woord. De site gebruikt hem
+voor de banner van een deelbare link.
+
+In de paginakop staat hij sinds 20-09-2026 niet meer. Daar staan het
+merkteken op 32 px en de naam als tekst ernaast: een lockup van 28 px hoog is
+op een telefoon een vlek van een paar millimeter, en als tekst blijft de naam
+scherp en voorleesbaar.
 
 Nooit: het woordmerk opnieuw zetten uit een lettertype, de afstand tot de
 tegel veranderen, of het eerste woord zonder het tweede op een pagina zetten.
@@ -131,12 +136,25 @@ een smal scherm vouwt de navigatie eronder.
 
 ## 7. Onderdelen op deze site
 
-- **Paginakop:** lockup links, navigatie rechts in `leisteen` op 15 px, de
-  huidige pagina in de tekstkleur met `aria-current="page"`.
+- **Paginakop:** het merkteken op 32 px met de naam als tekst ernaast,
+  navigatie rechts in `leisteen`, de huidige pagina in de tekstkleur met
+  `aria-current="page"`. Onder 40 rem staat de navigatie in een `details` die
+  als paneel onder de kop opengaat; er komt geen JavaScript aan te pas.
 - **Paginatitel:** een label in kapitalen erboven waar dat iets toevoegt, dan
-  de titel in `loof` op 32 px, dan de inleiding op 18 px.
-- **Blok:** twee blokken onder elkaar worden gescheiden door 48 px ruimte en
-  één `zilver`-lijn. Dat is de enige scheiding die de site kent.
+  de titel in `loof`, dan de inleiding. De maten schalen met `clamp()` mee met
+  het venster, tussen de telefoon en de maat uit sectie 5.
+- **Blok:** twee blokken onder elkaar worden gescheiden door ruimte en één
+  `zilver`-lijn. Dat is de enige scheiding die de site kent.
+- **Band:** de startpagina zet een blok op een rustige tint, een menging van
+  `loof` met `mist` (5%) op licht en van `blad` met `inkt` (7%) op donker.
+  Gemeten op 20-09-2026: lopende tekst haalt er 14,06:1 en 13,43:1, gedempte
+  tekst 5,12:1 en 6,70:1, en `goud` als lijn 3,19:1. De pagina's achter het
+  menu dragen geen band: daar is rust de opdracht (eigenaar, 20-09-2026).
+- **Actie:** de ene knop die op een pagina telt, gevuld met `loof` en tekst in
+  `mist` (7,33:1); op donker `blad` met `inkt` (7,85:1). Minstens 44 px hoog.
+- **Pictogram:** Lucide, gevendord onder `static/icons/lucide/`, 20 px naast
+  een woord en 32 px op een dienstblok, in de kleur van de tekst ernaast en
+  nooit alleen. De pin staat in `docs/VERSIONS.md`.
 - **Hoofdlink:** de ene link die op een pagina telt, in `loof` SemiBold met
   een 2 px lijn in `goud` eronder. Eén per pagina, nooit twee.
 - **Gegevenslijst:** de contactpagina zet label en waarde naast elkaar met een
@@ -160,6 +178,9 @@ een smal scherm vouwt de navigatie eronder.
   alleen, in de inhoud en in het pad van elk bestand.
 - `static/fonts/inter/SHA256SUMS` legt de gevendorde bestanden vast;
   `shasum -a 256 -c SHA256SUMS` in die map controleert ze zonder netwerk.
+- `scripts/vendor/icons.sh` haalt de pictogrammen op en weigert een download
+  die niet de gepinde is; `scripts/vendor/icons.sh --verify` controleert de
+  boom zonder netwerk, en `scripts/checks/versions.sh` meet de pin.
 
 ## Bronnen
 

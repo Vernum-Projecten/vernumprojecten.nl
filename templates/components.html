@@ -1,12 +1,12 @@
 {# SPDX-FileCopyrightText: Vernum Projecten B.V. #}
 {# SPDX-License-Identifier: Apache-2.0 #}
 {#
-  De Tera-componenten die de markdown in content/ mag aanroepen. Zola 0.23
-  kent geen shortcodes meer; een component wordt hier gedefinieerd en in een
-  pagina aangeroepen als een zelfsluitend element tussen dubbele accolades
-  (https://www.getzola.org/documentation/content/overview/).
+  De Tera-componenten die de markdown in content/ en de sjablonen mogen
+  aanroepen. Zola 0.23 kent geen shortcodes meer; een component wordt hier
+  gedefinieerd en aangeroepen als een zelfsluitend element tussen dubbele
+  accolades (https://www.getzola.org/documentation/content/overview/).
 
-  Er is er één, en dat is met opzet: hoe meer een pagina kan aanroepen, hoe
+  Er zijn er twee, en dat is met opzet: hoe meer een pagina kan aanroepen, hoe
   minder de tekst leesbaar blijft in het bestand zelf.
 #}
 {#
@@ -17,4 +17,15 @@
 #}
 {% component hoofdlink(pad: string, tekst: string) -%}
 <a class="hoofdlink" href="{{ get_url(path=pad) }}">{{ tekst }}</a>
+{%- endcomponent %}
+
+{#
+  icoon: een gevendord Lucide-bestand, in de pagina zelf gezet in plaats van
+  als `img` geladen (static/icons/lucide/, scripts/vendor/icons.sh). Zo krijgt
+  het de kleur van de tekst ernaast, want het bestand tekent met
+  `currentColor`, en scheelt het een verzoek. Het pictogram staat altijd naast
+  een woord, dus het is `aria-hidden` en een schermlezer slaat het over.
+#}
+{% component icoon(naam: string, klasse: string = "") -%}
+<span class="icoon {{ klasse }}" aria-hidden="true">{{ load_data(path="static/icons/lucide/" ~ naam ~ ".svg", format="plain") | safe }}</span>
 {%- endcomponent %}
