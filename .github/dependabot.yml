@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: Vernum Projecten B.V.
+# SPDX-License-Identifier: Apache-2.0
+
+# .github/dependabot.yml: automated dependency updates.
+#
+# One ecosystem. `github-actions` bumps the digest-pinned actions the two
+# workflows use. There is no package manager in this repository: Zola is a
+# pinned release tarball verified by sha256, and its pin lives in
+# docs/VERSIONS.md, which no bot reads.
+#
+# COOLDOWN is the delay between a release being published and this bot
+# proposing it, so a compromised or yanked release has a window to be caught
+# before it reaches a pull request. The entry sits at 7 days, the floor
+# zizmor's `dependabot-cooldown` audit enforces, and that audit runs over this
+# file in CI.
+#
+# SECURITY updates are exempt by design: Dependabot applies no cooldown to
+# advisory-driven bumps, so an advisory still arrives immediately.
+# https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    labels:
+      - "dependencies"
+    schedule:
+      interval: "weekly"
+    # `semver-major-days` is not accepted for this ecosystem, so
+    # `default-days` covers every bump.
+    cooldown:
+      default-days: 7
+    groups:
+      # One weekly pull request for every minor and patch action bump. Majors
+      # stay individual: a breaking action major is a real review, and burying
+      # one in a batch is how it gets waved through.
+      actions-minor-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+    commit-message:
+      prefix: "ci"
