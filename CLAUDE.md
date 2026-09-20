@@ -129,6 +129,15 @@ Branch from `origin/HEAD` with a conventional type (`feat/`, `fix/`,
   comment, `permissions: {}` sits at workflow level, no `${{ }}` context is
   interpolated into a `run:` block, and `persist-credentials: false` is on
   every checkout (`.claude/rules/ci-cd.md`).
+- **Jobs run on `ubuntu-latest`, and the private sibling's `self-hosted`
+  labels are the one line not to copy from it** (owner ruling 2026-09-20).
+  This repository is public, so GitHub's runners are free for it and are the
+  standard for Pages. The sibling bought its own machines because it is
+  private and was spending a billed minute allowance; that reasoning does not
+  reach a public repository, and the organisation's three machines are a
+  queue this site would sit in behind a codebase that merges dozens of times
+  a day. Every other rule in the sibling's CI discipline applies here
+  unchanged.
 - **Prose follows `.claude/rules/writing-style.md`:** no em dashes, no
   "not X but Y", no decorative triads, and none of the banned words in either
   language. `scripts/checks/prose-style.sh` fails on any hit, per edit through

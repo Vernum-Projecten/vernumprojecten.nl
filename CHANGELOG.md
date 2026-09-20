@@ -44,3 +44,11 @@ en de versienummering volgt [Semantic Versioning 2.0.0](https://semver.org/lang/
   GitHub staat aan voor deze repository) en wat je terugkrijgt.
 - `scripts/gh/labels.sh`: de labelset van de tracker als bestand, zodat hij
   niet alleen in de webinterface bestaat.
+
+### Gewijzigd
+
+- Beide workflows draaien op `ubuntu-latest` in plaats van op de eigen
+  machines van de organisatie. Deze repository is openbaar, dus de runners
+  van GitHub zijn er gratis voor, en de site wacht niet meer in een rij achter
+  de andere repository. `shellcheck` wordt daarbij op zijn gepinde versie
+  geïnstalleerd in plaats van van het image van de runner gelezen.
