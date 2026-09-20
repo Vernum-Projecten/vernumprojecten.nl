@@ -50,18 +50,21 @@ de eigenaar bij de registrar zet, met de leesdatum erbij.
 ## CI-tools
 
 De `guards`-job van `.github/workflows/ci.yml` draait drie analyzers, elk op
-een exacte versie zodat een CI-resultaat gelijk is aan het lokale. `zizmor`
-komt via `taiki-e/install-action`, dat de upstream checksum verifieert;
-`actionlint` draait uit zijn officiële image, gepind op tag en digest.
-`shellcheck` staat al op de runner: die installer haalt eerst het pakket van
-de distributie weg met `apt-get remove`, en het runneraccount heeft geen sudo.
-De job controleert daarom de versie in plaats van hem te installeren.
+een exacte versie zodat een CI-resultaat gelijk is aan het lokale. `zizmor` en
+`shellcheck` komen via `taiki-e/install-action`, dat de upstream checksum
+verifieert; `actionlint` draait uit zijn officiële image, gepind op tag en
+digest.
+
+Het image van de runner draagt zelf ook een `shellcheck`, en welke dat is
+verandert als dat image opnieuw gebouwd wordt. De job installeert de gepinde
+versie eroverheen en controleert daarna welke er op `PATH` staat, zodat een
+bevinding in CI met dezelfde versie lokaal te herhalen is.
 
 | Item | Pin | Herhaald in |
 | --- | --- | --- |
 | `zizmor` | 1.30.1 (gecontroleerd 2026-09-20) | `.github/workflows/ci.yml` |
 | `actionlint` | 1.7.12 (gecontroleerd 2026-09-20) | `.github/workflows/ci.yml` |
-| `shellcheck` | 0.11.0 (Ubuntu 26.04 levert 0.11.0-2 in universe) | `SHELLCHECK_VERSION` in `.github/workflows/ci.yml`, en de runners |
+| `shellcheck` | 0.11.0 (release van 2025-08-04, de nieuwste; gecontroleerd 2026-09-20) | `SHELLCHECK_VERSION` in `.github/workflows/ci.yml`, die de installer en de controle allebei lezen |
 
 Houd de lokaal geïnstalleerde versies op deze nummers, zodat een bevinding één
 lokale run kost in plaats van een CI-rondje (`.claude/rules/ci-cd.md`).
@@ -82,11 +85,15 @@ bumpt ze; zizmor controleert de vorm. De set is klein:
 
 ## Runners
 
-Elke job draait op de runners van de organisatie, met de labels
-`self-hosted, linux, x64, hetzner`. Ze zijn geregistreerd bij
-`Vernum-Projecten` vanuit `Vernum-Projecten/hetzner-runners` en bedienen de
-hele organisatie. Drie machines op Ubuntu 26.04, één job tegelijk per machine,
-en het runneraccount heeft geen sudo.
+Elke job draait op `ubuntu-latest`, de runners van GitHub zelf (besluit van de
+eigenaar, 2026-09-20). Deze repository is openbaar, dus die runners zijn er
+gratis voor en er is geen minutenbudget om op te letten.
+
+`ubuntu-latest` staat met opzet niet op een vaste versie. Wat het image
+draagt wordt hier nergens verondersteld: elk gereedschap dat een controle
+gebruikt staat in de tabellen hierboven en wordt op zijn gepinde versie
+geïnstalleerd. Wijst GitHub `ubuntu-latest` naar een nieuwe versie van
+Ubuntu, dan verandert er aan een run dus niets.
 
 ## Lettertypen
 

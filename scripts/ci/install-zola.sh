@@ -9,9 +9,9 @@
 # on every push instead of for the first time against a live deploy
 # (.claude/rules/ci-cd.md, "Workflow security").
 #
-# The runner account has no sudo, so nothing is installed into a system
-# directory. The binary lands in the directory you name and the caller runs it
-# by its path.
+# Nothing is installed into a system directory, even where the runner would
+# allow it. The binary lands in the directory you name and the caller runs it
+# by its path, so a run leaves the machine as it found it.
 #
 # The version and the checksum come from the environment, so the workflow
 # holds the pin and scripts/checks/versions.sh measures it against

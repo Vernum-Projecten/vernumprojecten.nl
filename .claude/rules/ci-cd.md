@@ -19,7 +19,7 @@ repository runs under, with the Rust half removed and the Pages half added.
 
 Two workflows and nothing else:
 
-- `.github/workflows/ci.yml`: one `guards` job. zizmor over `.github/`,
+- `.github/workflows/ci.yml`: one `guards` job on `ubuntu-latest`. zizmor over `.github/`,
   actionlint over the workflows, shellcheck over every tracked shell program,
   then the committed guards as successive named steps: `prose-style`,
   `versions`, `brand-contrast`, `company-name`, and `zola check` over the
@@ -39,21 +39,32 @@ push, plus the `main` run watched afterwards.
 
 ## Where a job runs
 
-**Every job of every workflow runs on the organisation's own runners.** The
-labels are `self-hosted, linux, x64, hetzner`; the runners are registered at
-the `Vernum-Projecten` organisation from `Vernum-Projecten/hetzner-runners`
-and serve the whole organisation. Three machines on Ubuntu 26.04, one job at
-a time each.
+**Every job of every workflow runs on `ubuntu-latest`, GitHub's own runners**
+(owner ruling 2026-09-20). This repository is public, so those runners are
+free for it and carry no minute budget to spend.
 
-**The runner account has no sudo, so a workflow installs nothing that needs
-it.** Two consequences here:
+**The private sibling repository runs on the organisation's own machines, and
+that difference is deliberate.** There the repository is private, every
+minute is billed, and two days of merges spent most of a 2,000-minute
+allowance, which is what bought three Hetzner boxes. None of that reasoning
+reaches a public repository: the bill is zero either way, and the
+organisation's runners are a queue this site would sit in behind a codebase
+that merges dozens of times a day. Hosted runners also start cold and clean,
+which is what a lane that publishes to the open internet should want.
 
-- `shellcheck` is asserted, never installed: the runner carries it, the pin
-  lives in the `SHELLCHECK_VERSION` variable of `ci.yml`, and the job checks
-  `shellcheck --version` against it.
-- Zola is unpacked into `$RUNNER_TEMP` and called by its path. It is never
-  installed into a system directory, and it never arrives through a
-  third-party action.
+So when you read the sibling's CI rules, the `self-hosted` labels are the one
+line not to copy. Everything else in them applies here unchanged.
+
+Two consequences follow from the runner being a fresh image each time:
+
+- **A tool the image carries is still pinned and installed.** The image ships
+  its own shellcheck, and which one moves when the image is rebuilt, so
+  `ci.yml` installs the pinned version over it through the SHA-pinned
+  installer and then asserts that the version on `PATH` is that one. A
+  finding in CI has to be reproducible by the same version locally.
+- **Zola is unpacked into `$RUNNER_TEMP` and called by its path.** It is
+  never installed into a system directory, even though a hosted runner would
+  allow it, and it never arrives through a third-party action.
 
 ## Workflow security (every workflow, no exceptions)
 
@@ -82,9 +93,9 @@ audited alongside the workflows. Never narrow it to make a finding disappear:
 fix the cause, or record a `# zizmor: ignore[audit]` suppression with its
 reason on the line the finding names.
 
-zizmor's `self-hosted-runner` audit names every `runs-on:` of this
-repository. It is a pedantic-tier audit, so `--min-severity=low` does not
-report it, and the reasoning that accepts it is the section above.
+`.github/actionlint.yaml` declares no custom runner label, and it should stay
+that way: actionlint then knows every label this repository uses, so a typo
+in a `runs-on:` is a finding instead of a label somebody once declared.
 
 ## Shell scripts are analysed like code
 

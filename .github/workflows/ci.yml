@@ -1,10 +1,10 @@
 # SPDX-FileCopyrightText: Vernum Projecten B.V.
 # SPDX-License-Identifier: Apache-2.0
 
-# The gate. One job, because every check here takes seconds of its own and a
-# runner takes one job at a time: a job per check would pay a checkout and a
-# tool install per check where one job pays one
-# (.claude/rules/ci-cd.md, "Where a job runs").
+# The gate. One job, because every check here takes seconds of its own: a job
+# per check would pay a checkout and a tool install per check where one job
+# pays one, and nothing here is slow enough for the parallelism to earn that
+# back (.claude/rules/ci-cd.md, "Where a job runs").
 #
 # Every step carries a name and `if: ${{ !cancelled() }}`, so one run reports
 # every failing check instead of stopping at the first.
@@ -31,10 +31,12 @@ concurrency:
 permissions: {}
 
 env:
-  # shellcheck comes from the runner rather than from an installer, because
-  # that installer first removes the distribution package with `apt-get
-  # remove` and the runner account has no sudo. The pin lives here and the job
-  # refuses a runner whose version drifted from it.
+  # The runner image carries a shellcheck of its own, and which one moves when
+  # the image is rebuilt. The job installs this version over it and then
+  # refuses to continue if the one on PATH is a different one, so a finding
+  # here is reproducible by the same version locally. The pin lives in this
+  # one place: the installer below reads it and so does the assertion, and
+  # scripts/checks/versions.sh measures it against docs/VERSIONS.md.
   SHELLCHECK_VERSION: "0.11.0"
   # The same Zola pin as pages.yml, so the binary that checks the site is the
   # binary that builds it. scripts/checks/versions.sh measures both files
@@ -45,7 +47,7 @@ env:
 jobs:
   guards:
     name: guards
-    runs-on: [self-hosted, linux, x64, hetzner]
+    runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
       contents: read
@@ -54,14 +56,28 @@ jobs:
         with:
           persist-credentials: false
 
-      # zizmor as the upstream release binary, pinned by version rather than
-      # taken from a distribution package that moves underneath us. The
-      # SHA-pinned installer verifies its checksum, and `tool: <name>@<version>`
-      # is the one line scripts/checks/versions.sh reads the pin from.
-      - uses: taiki-e/install-action@26e9283f268b880168bdbd2c545dfcd60ec2c6ab # v2.87.13
+      # Both analysers as their upstream release binaries, pinned by version
+      # rather than taken from the runner image, whose versions move when the
+      # image is rebuilt. The SHA-pinned installer verifies each checksum, and
+      # `tool: <name>@<version>` is the one line
+      # scripts/checks/versions.sh reads the zizmor pin from. Two steps rather
+      # than one list, so each pin stays on a line of its own that the guard
+      # can read.
+      - name: Install the pinned zizmor
+        uses: taiki-e/install-action@26e9283f268b880168bdbd2c545dfcd60ec2c6ab # v2.87.13
         with:
           tool: zizmor@1.30.1
 
+      - name: Install the pinned shellcheck
+        uses: taiki-e/install-action@26e9283f268b880168bdbd2c545dfcd60ec2c6ab # v2.87.13
+        with:
+          tool: shellcheck@${{ env.SHELLCHECK_VERSION }}
+
+      # The installer puts its bin directory in front of PATH, so this should
+      # already be the version above. It is asserted because the runner image
+      # ships its own shellcheck: if the ordering ever changes, a finding here
+      # would stop matching the one a developer gets locally, and that is the
+      # failure worth catching loudly.
       - name: shellcheck is the pinned version
         run: |
           shellcheck --version && shellcheck --version | grep -Fxq "version: ${SHELLCHECK_VERSION}"

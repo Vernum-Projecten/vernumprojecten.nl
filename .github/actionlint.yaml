@@ -4,11 +4,10 @@
 # actionlint configuration.
 # https://github.com/rhysd/actionlint/blob/main/docs/config.md
 
-# The organisation's runners (Vernum-Projecten/hetzner-runners) carry the
-# standard labels self-hosted, linux and x64, which actionlint knows, plus
-# this one custom label.
-self-hosted-runner:
-  labels: [hetzner]
+# There is no `self-hosted-runner` entry, and that is the point: every job
+# here runs on `ubuntu-latest`, so actionlint knows every label this
+# repository uses and a typo in a `runs-on:` is a finding rather than a custom
+# label somebody once declared (.claude/rules/ci-cd.md, "Where a job runs").
 
 # null disables the configuration-variables check, so a `vars.*` added later
 # is accepted without being listed here.

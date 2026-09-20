@@ -97,8 +97,9 @@ if [ -f .github/workflows/ci.yml ]; then
       sed -nE "s|^[[:space:]]*tool:[[:space:]]*$1@([^[:space:]]+).*|\1|p" \
         .github/workflows/ci.yml | head -n1
       ;;
-    # The shell linter is the runner's own package, asserted rather than
-    # installed, so its pin is a workflow environment variable
+    # The shell linter's pin is a workflow environment variable rather than an
+    # installer line, because the installer step and the assertion step both
+    # read it, so it keeps one home
     # (.claude/rules/ci-cd.md, "Where a job runs").
     shellcheck)
       wf_env SHELLCHECK_VERSION .github/workflows/ci.yml
