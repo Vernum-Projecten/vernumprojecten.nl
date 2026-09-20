@@ -30,17 +30,17 @@ en de versienummering volgt [Semantic Versioning 2.0.0](https://semver.org/lang/
 - `scripts/ci/install-zola.sh` haalt de gepinde Zola op en weigert elke andere
   inhoud. De weigering wordt bij elke push bewezen met `--self-test`, dus een
   wijziging aan de lane wordt gemeten voordat er iets gepubliceerd wordt.
-
 - De werkafspraken van de repository: `CLAUDE.md`, de regels onder
   `.claude/rules/` (schrijfstijl, CI en publiceren, commentaar, de
-  issue-loop), de twee hooks die per bewerking meekijken, en de controles
+  issue-loop), de drie hooks die per bewerking meekijken, en de controles
   `prose-style.sh`, `versions.sh` en `company-name.sh`.
 - `docs/VERSIONS.md` als de enige plek waar een versie staat, met per pin de
   datum waarop hij bij de uitgever is gelezen.
-- Een Nederlandse `README.md` die zegt wat de site is, hoe je hem bouwt, hoe
-  hij gepubliceerd wordt, en welke DNS-records de eigenaar bij de registrar
-  zet.
+- Een Nederlandse `README.md` die zegt wat de site is, hoe je hem bouwt en
+  hoe hij gepubliceerd wordt.
 - `NOTICE`, `.editorconfig`, `.gitattributes`, `.gitignore` en een
   Dependabot-configuratie voor de actions.
 - `SECURITY.md`: wat er te melden valt, hoe je meldt (de private meldknop van
   GitHub staat aan voor deze repository) en wat je terugkrijgt.
+- `scripts/gh/labels.sh`: de labelset van de tracker als bestand, zodat hij
+  niet alleen in de webinterface bestaat.
