@@ -1,0 +1,80 @@
+# SPDX-FileCopyrightText: Vernum Projecten B.V.
+# SPDX-License-Identifier: Apache-2.0
+
+# Build the site and publish it to GitHub Pages.
+#
+# The source of Pages is "GitHub Actions", so what this workflow uploads is
+# what https://vernumprojecten.nl serves. There is no branch that publishes by
+# itself and no built site in the repository (docs/publiceren.md).
+#
+# Two jobs, because the token needed to deploy should not be held by the job
+# that runs a downloaded binary. `build` has read access and nothing else;
+# `deploy` holds `pages: write` and `id-token: write` and runs one action.
+#
+# Zola arrives as its release tarball, measured against the sha256 pinned
+# below before it is unpacked. The comparison is a branch, so it lives in
+# scripts/ci/install-zola.sh, whose --self-test runs in ci.yml on every push
+# (.claude/rules/ci-cd.md).
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# One deploy at a time, and a running one is never cancelled: a half-finished
+# deploy would leave the live site between two versions.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions: {}
+
+# The pin and its checksum. scripts/checks/versions.sh measures both against
+# the `Zola` and `Zola sha256` rows of docs/VERSIONS.md, in this file and in
+# ci.yml, so the site is built and checked with the same binary.
+env:
+  ZOLA_VERSION: "0.23.6"
+  ZOLA_SHA256: "7d77a4220a4f699cba2fc0e0c7859f780e887e269159ad4fab90e11ea16c906f"
+
+jobs:
+  build:
+    name: build
+    runs-on: [self-hosted, linux, x64, hetzner]
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      # configure-pages reads the Pages configuration of the repository to
+      # confirm the source is this workflow. It writes nothing.
+      pages: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Read the Pages configuration
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - name: Install the pinned Zola, refusing any other bytes
+        run: scripts/ci/install-zola.sh "$RUNNER_TEMP/zola-bin"
+      - name: Build the site
+        run: |
+          "$RUNNER_TEMP/zola-bin/zola" build
+      - name: Upload the built site as the Pages artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: public
+
+  deploy:
+    name: deploy
+    needs: build
+    runs-on: [self-hosted, linux, x64, hetzner]
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy the artifact to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

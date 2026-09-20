@@ -23,6 +23,13 @@ en de versienummering volgt [Semantic Versioning 2.0.0](https://semver.org/lang/
   nakijkt.
 - `docs/publiceren.md`: hoe de site op het domein komt en hoe de repository
   daarvoor is ingesteld.
+- De twee workflows. `pages.yml` bouwt de site bij elke push naar `main` en
+  zet hem online; alleen de deploy-job heeft de rechten om te publiceren.
+  `ci.yml` draait zizmor, actionlint, shellcheck en de vier controles, plus
+  `zola check` en `zola build`.
+- `scripts/ci/install-zola.sh` haalt de gepinde Zola op en weigert elke andere
+  inhoud. De weigering wordt bij elke push bewezen met `--self-test`, dus een
+  wijziging aan de lane wordt gemeten voordat er iets gepubliceerd wordt.
 
 - De werkafspraken van de repository: `CLAUDE.md`, de regels onder
   `.claude/rules/` (schrijfstijl, CI en publiceren, commentaar, de
