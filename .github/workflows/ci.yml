@@ -1,0 +1,166 @@
+# SPDX-FileCopyrightText: Vernum Projecten B.V.
+# SPDX-License-Identifier: Apache-2.0
+
+# The gate. One job, because every check here takes seconds of its own and a
+# runner takes one job at a time: a job per check would pay a checkout and a
+# tool install per check where one job pays one
+# (.claude/rules/ci-cd.md, "Where a job runs").
+#
+# Every step carries a name and `if: ${{ !cancelled() }}`, so one run reports
+# every failing check instead of stopping at the first.
+#
+# There is no `pull_request` trigger. Every pull request arms auto-merge the
+# moment it opens and merges within seconds, so a pull-request run would
+# verify the same commit twice. The evidence for a change is the whole guard
+# set run locally with these exact flags before the push, plus the run on
+# `main` watched afterwards.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  merge_group:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  # A push to main and a merge-group run each verify a distinct commit that
+  # keeps its own result, so a run is never cancelled by its successor.
+  cancel-in-progress: false
+
+permissions: {}
+
+env:
+  # shellcheck comes from the runner rather than from an installer, because
+  # that installer first removes the distribution package with `apt-get
+  # remove` and the runner account has no sudo. The pin lives here and the job
+  # refuses a runner whose version drifted from it.
+  SHELLCHECK_VERSION: "0.11.0"
+  # The same Zola pin as pages.yml, so the binary that checks the site is the
+  # binary that builds it. scripts/checks/versions.sh measures both files
+  # against docs/VERSIONS.md.
+  ZOLA_VERSION: "0.23.6"
+  ZOLA_SHA256: "7d77a4220a4f699cba2fc0e0c7859f780e887e269159ad4fab90e11ea16c906f"
+
+jobs:
+  guards:
+    name: guards
+    runs-on: [self-hosted, linux, x64, hetzner]
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # zizmor as the upstream release binary, pinned by version rather than
+      # taken from a distribution package that moves underneath us. The
+      # SHA-pinned installer verifies its checksum, and `tool: <name>@<version>`
+      # is the one line scripts/checks/versions.sh reads the pin from.
+      - uses: taiki-e/install-action@26e9283f268b880168bdbd2c545dfcd60ec2c6ab # v2.87.13
+        with:
+          tool: zizmor@1.30.1
+
+      - name: shellcheck is the pinned version
+        run: |
+          shellcheck --version && shellcheck --version | grep -Fxq "version: ${SHELLCHECK_VERSION}"
+
+      # The static security analysis for GitHub Actions: every `uses:` pinned
+      # to a commit SHA (unpinned-uses), no checkout persisting credentials
+      # (artipacked), no context value spliced into a shell
+      # (template-injection). The path is the whole of .github, so
+      # dependabot.yml is audited alongside the workflows.
+      - name: zizmor audits .github
+        if: ${{ !cancelled() }}
+        # GH_TOKEN enables the online audits. impostor-commit verifies that a
+        # pinned commit really belongs to the repository named in front of it,
+        # which it cannot do offline.
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: zizmor --min-severity=low .github/
+
+      - name: actionlint lints .github/workflows
+        if: ${{ !cancelled() }}
+        # The official image, digest-pinned. actionlint is a Go binary whose
+        # README offers `curl | bash` off main as the alternative, the
+        # unpinned fetch the pinning rule forbids. The image also bundles
+        # shellcheck, which half of actionlint's value depends on.
+        run: |
+          docker run --rm \
+            -v "$PWD:/repo" --workdir /repo \
+            rhysd/actionlint:1.7.12@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667 \
+            -color
+
+      # `--severity=style` is the lowest floor, so every finding gates. A
+      # finding is fixed, or it carries a per-line `# shellcheck disable=SCnnnn`
+      # with its reason. There is no .shellcheckrc, deliberately.
+      - name: Every tracked shell program is clean at severity=style
+        if: ${{ !cancelled() }}
+        run: |
+          set -euo pipefail
+          files=()
+          while IFS= read -r -d '' f; do files+=("$f"); done < <(git ls-files -z '*.sh')
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "no shell files to check"
+            exit 0
+          fi
+          shellcheck --severity=style "${files[@]}"
+
+      # The publishing lane's one branch, measured here on every push rather
+      # than for the first time against a live deploy.
+      - name: install-zola self-test
+        if: ${{ !cancelled() }}
+        run: scripts/ci/install-zola.sh --self-test
+
+      # No em dash and none of the listed words or phrases in first-party
+      # prose, English or Dutch: every tracked markdown file, the templates,
+      # config.toml, and the comment lines of the shell and Sass sources.
+      - name: prose-style
+        if: ${{ !cancelled() }}
+        run: |
+          bash scripts/checks/prose-style.sh --self-test
+          bash scripts/checks/prose-style.sh --all
+
+      # Every pin against docs/VERSIONS.md: the Zola version and checksum in
+      # both workflows, the analyzer versions, the domain in config.toml and
+      # static/CNAME, the vendored typeface against its own SHA256SUMS, and
+      # the licence claim of every first-party file.
+      - name: versions
+        if: ${{ !cancelled() }}
+        run: bash scripts/checks/versions.sh
+
+      # Every token in sass/_huisstijl-tokens.scss measures at least the WCAG
+      # 2.2 ratio its `safe:` claim needs against the two grounds, so a
+      # recoloured token cannot keep a stale claim.
+      - name: brand-contrast
+        if: ${{ !cancelled() }}
+        run: bash scripts/checks/brand-contrast.sh
+
+      # The company is named in full and no second company is named, in the
+      # content and the path of every tracked file.
+      - name: company-name
+        if: ${{ !cancelled() }}
+        run: |
+          bash scripts/checks/company-name.sh --self-test
+          bash scripts/checks/company-name.sh --all
+
+      - name: Install the pinned Zola, refusing any other bytes
+        if: ${{ !cancelled() }}
+        run: scripts/ci/install-zola.sh "$RUNNER_TEMP/zola-bin"
+
+      # `zola check` builds without rendering and follows every link. External
+      # links are skipped here: an outside site that answers slowly or rate
+      # limits says nothing about this repository, and a gate that fails for
+      # that reason teaches everyone to ignore it. Run `zola check` without
+      # the flag locally whenever you add or change a link (README.md).
+      - name: zola check
+        if: ${{ !cancelled() }}
+        run: |
+          "$RUNNER_TEMP/zola-bin/zola" check --skip-external-links
+
+      # And the render itself, because `check` does not run the templates.
+      - name: zola build
+        if: ${{ !cancelled() }}
+        run: |
+          "$RUNNER_TEMP/zola-bin/zola" build
