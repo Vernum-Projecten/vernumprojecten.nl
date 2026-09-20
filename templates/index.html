@@ -1,18 +1,85 @@
 {# SPDX-FileCopyrightText: Vernum Projecten B.V. #}
 {# SPDX-License-Identifier: Apache-2.0 #}
 {#
-  De startpagina. De `title` van de sectie is de naam van het bedrijf, want
-  dat is wat er in de tabbladtitel hoort; de kop op de pagina zelf zegt wat
-  het bedrijf doet en staat in `extra.kop`.
+  De startpagina, in vier blokken: de opening, wat wij doen, hoe een opdracht
+  loopt, en de afsluiting met de actie. De woorden van elk blok staan in de
+  front matter van content/_index.md, zodat de tekst op één plek te lezen en
+  te wijzigen is.
+
+  De `title` van de sectie is de naam van het bedrijf, want dat is wat in de
+  tabbladtitel hoort; de kop op de pagina zelf staat in `extra.kop`.
 #}
 {% extends "base.html" %}
 
+
 {% block inhoud %}
-<div class="tekstkolom">
-  <header class="paginakop">
-    <p class="label">{{ config.extra.plaats }}</p>
-    <h1>{{ section.extra.kop | default(value=section.title) }}</h1>
-  </header>
-  {{ section.content | safe }}
-</div>
+<section class="opening">
+  <div class="schil opening__binnen">
+    <div class="opening__tekst">
+      <p class="label">{{ config.extra.plaats }}</p>
+      <h1>{{ section.extra.kop | default(value=section.title) }}</h1>
+      <p class="inleiding">{{ section.extra.opening }}</p>
+      <a class="knop" href="{{ get_url(path=section.extra.actie_pad) }}">
+        {{ <icoon naam="mail" /> }}
+        <span>{{ section.extra.actie_tekst }}</span>
+      </a>
+    </div>
+    <img
+      class="opening__teken"
+      src="{{ get_url(path='brand/huisstijl-icon-auto.svg') }}"
+      width="64"
+      height="64"
+      alt="Het merkteken van {{ config.extra.bedrijf }}: een V van twee armen met een gouden punt eronder."
+    />
+  </div>
+</section>
+
+<section class="band">
+  <div class="schil">
+    <h2>{{ section.extra.diensten_kop }}</h2>
+    <ul class="diensten">
+      {%- for dienst in section.extra.diensten %}
+      <li class="dienst">
+        {{ <icoon naam={dienst.icoon} klasse="icoon--groot" /> }}
+        <h3>{{ dienst.titel }}</h3>
+        <p>{{ dienst.tekst }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+    <a class="verderlink" href="{{ get_url(path='@/diensten.md') }}">
+      <span>Alle diensten</span>
+      {{ <icoon naam="arrow-right" /> }}
+    </a>
+  </div>
+</section>
+
+<section class="schil stappenblok">
+  <h2>{{ section.extra.stappen_kop }}</h2>
+  <ol class="stappen">
+    {%- for stap in section.extra.stappen %}
+    <li class="stap">
+      <p class="stap__nummer" aria-hidden="true">{{ loop.index }}</p>
+      <h3>{{ stap.titel }}</h3>
+      <p>{{ stap.tekst }}</p>
+    </li>
+    {%- endfor %}
+  </ol>
+  <a class="verderlink" href="{{ get_url(path='@/werkwijze.md') }}">
+    <span>{{ section.extra.stappen_link_tekst }}</span>
+    {{ <icoon naam="arrow-right" /> }}
+  </a>
+</section>
+
+<section class="band slot">
+  <div class="schil slot__binnen">
+    <div class="tekstkolom">
+      <h2>{{ section.extra.slot_kop }}</h2>
+      <p>{{ section.extra.slot_tekst }}</p>
+    </div>
+    <a class="knop" href="{{ get_url(path=section.extra.actie_pad) }}">
+      {{ <icoon naam="mail" /> }}
+      <span>{{ section.extra.actie_tekst }}</span>
+    </a>
+  </div>
+</section>
 {% endblock inhoud %}

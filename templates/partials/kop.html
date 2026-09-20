@@ -1,22 +1,44 @@
 {# SPDX-FileCopyrightText: Vernum Projecten B.V. #}
 {# SPDX-License-Identifier: Apache-2.0 #}
 {#
-  De paginakop: de lockup links op 28 px hoog, de navigatie rechts
-  (docs/huisstijl.md, sectie 6). Op een smal scherm vouwt de navigatie onder
-  de lockup, want beide staan in dezelfde flexrij.
+  De paginakop: het merkteken met de naam links, de navigatie rechts.
+
+  Op een smal scherm staat de navigatie in een `details`, die zonder
+  JavaScript open en dicht gaat; vanaf 40 rem verbergt de stylesheet de
+  `summary` en staan de links naast elkaar
+  (https://html.spec.whatwg.org/multipage/interactive-elements.html#the-details-element).
+
+  De naam staat als tekst naast het teken, niet als lockup-afbeelding: op een
+  telefoon wordt die afbeelding een vlek van een paar millimeter. De `alt` van
+  het teken is leeg, want de naam ernaast zegt hetzelfde in tekst.
 #}
+
 <header class="kop">
   <div class="schil kop__binnen">
-    <a class="kop__merk" href="{{ get_url(path='@/_index.md') }}">
-      {% include "partials/lockup.html" %}
+    <a class="merk" href="{{ get_url(path='@/_index.md') }}">
+      <img
+        class="merk__teken"
+        src="{{ get_url(path='brand/huisstijl-icon-auto.svg') }}"
+        width="64"
+        height="64"
+        alt=""
+      />
+      <span class="merk__naam">{{ config.extra.bedrijf }}</span>
     </a>
-    <nav class="navigatie" aria-label="Hoofdmenu">
-      {%- for item in config.extra.navigatie %}
-      <a
-        href="{{ get_url(path=item.pad, trailing_slash=true) }}"
-        {%- if current_path is defined and current_path == item.pad %} aria-current="page"{% endif -%}
-      >{{ item.naam }}</a>
-      {%- endfor %}
-    </nav>
+
+    <details class="menu">
+      <summary class="menu__knop">
+        {{ <icoon naam="menu" /> }}
+        <span>Menu</span>
+      </summary>
+      <nav class="navigatie" aria-label="Hoofdmenu">
+        {%- for item in config.extra.navigatie %}
+        <a
+          href="{{ get_url(path=item.pad, trailing_slash=true) }}"
+          {%- if current_path is defined and current_path == item.pad %} aria-current="page"{% endif -%}
+        >{{ item.naam }}</a>
+        {%- endfor %}
+      </nav>
+    </details>
   </div>
 </header>

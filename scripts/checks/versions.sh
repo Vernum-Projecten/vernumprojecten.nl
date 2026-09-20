@@ -183,6 +183,31 @@ else
   note "no static/fonts/inter/SHA256SUMS yet, skipped"
 fi
 
+echo "== the icons (static/icons/lucide/ <-> docs/VERSIONS.md)"
+want_lucide="$(pin_of "Lucide" docs/VERSIONS.md)"
+if [ -z "$want_lucide" ]; then
+  bad "docs/VERSIONS.md has no 'Lucide' row"
+elif [ ! -f static/icons/lucide/PROVENANCE.md ]; then
+  note "no static/icons/lucide/PROVENANCE.md yet, skipped"
+elif ! /usr/bin/grep -qF "$want_lucide" static/icons/lucide/PROVENANCE.md; then
+  bad "static/icons/lucide/PROVENANCE.md does not name the pin $want_lucide"
+elif ! /usr/bin/grep -qF "$want_lucide" scripts/vendor/icons.sh; then
+  bad "scripts/vendor/icons.sh does not carry the pin $want_lucide"
+else
+  note "OK: Lucide $want_lucide"
+fi
+# The vendored tree against its own checksums, so an icon that was replaced by
+# hand is caught here and not by a reader of the site.
+if [ -f static/icons/lucide/SHA256SUMS ]; then
+  if (cd static/icons/lucide && shasum -a 256 -c SHA256SUMS >/dev/null 2>&1); then
+    note "OK: the vendored Lucide files match SHA256SUMS"
+  else
+    bad "static/icons/lucide/ does not match its own SHA256SUMS"
+  fi
+else
+  note "no static/icons/lucide/SHA256SUMS yet, skipped"
+fi
+
 echo "== licence (LICENSE <-> SPDX headers)"
 if [ -f LICENSE ]; then
   stale=0

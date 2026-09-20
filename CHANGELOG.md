@@ -11,6 +11,14 @@ en de versienummering volgt [Semantic Versioning 2.0.0](https://semver.org/lang/
 
 ### Toegevoegd
 
+- De startpagina bestaat uit blokken: een opening met het merkteken en de
+  actie, drie diensten met een pictogram, de vier stappen van een opdracht en
+  een afsluiting. De andere pagina's kregen een kopblok met secties eronder.
+- Zes pictogrammen van Lucide 1.47.0, gevendord met hun licentie onder
+  `static/icons/lucide/` door `scripts/vendor/icons.sh`, en in de pagina zelf
+  gezet. Er wordt niets bij een derde partij opgehaald.
+- Een foto op de pagina Over, bijgesneden en verkleind tot 600 en 1200 px
+  breed.
 - `/voorwaarden/`: de algemene voorwaarden, gemarkeerd als concept tot de
   eigenaar ze vaststelt. De NLdigital Voorwaarden 2025 zijn niet gebruikt,
   omdat een niet-lid ze koopt vanaf € 395 en ze niet mag aanpassen (gelezen
@@ -64,6 +72,15 @@ en de versienummering volgt [Semantic Versioning 2.0.0](https://semver.org/lang/
   bouwen in stappen en het testen naar de overdracht, en noemt nog steeds geen
   bedrag en geen termijn zolang die niet zijn vastgesteld.
 - De 404-pagina is één zin en een link naar de startpagina.
+- De site is licht als de bezoeker niets heeft ingesteld; donker volgt de
+  instelling van het apparaat. De stylesheet is mobile-first: de basisregels
+  zijn de telefoon en een breder scherm krijgt er lagen bij op 40, 48 en
+  60 rem. De typeschaal schaalt met `clamp()` mee met het venster.
+- De paginakop draagt het merkteken met de naam als tekst, en onder 40 rem
+  een menu dat zonder JavaScript opengaat. De kop blijft bij het scrollen
+  staan. Elke link en elke knop is minstens 44 px hoog.
+- De voet zet de naam, de plaats, het KVK-nummer en het btw-nummer elk op een
+  eigen regel, zodat er niets meer midden in een nummer afbreekt.
 - `/privacy/` is een volledige verklaring onder de AVG: wie de
   verwerkingsverantwoordelijke is, wat de site zelf doet, wat de hosting
   vastlegt, wat er met een e-mail gebeurt, op welke grondslag (artikel 6, lid

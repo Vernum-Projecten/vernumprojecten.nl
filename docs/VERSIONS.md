@@ -105,6 +105,16 @@ oorsprong; er wordt geen lettertype bij een derde partij opgehaald.
 | --- | --- | --- |
 | `Inter` | 4.1 (release v4.1 van 2024-11-16 op github.com/rsms/inter) | `assets/fonts/inter/PROVENANCE.md`, `assets/brand/fonts.css`, `docs/huisstijl.md` |
 
+## Pictogrammen
+
+Zes pictogrammen, gevendord met hun licentie en hun `SHA256SUMS` onder
+`static/icons/lucide/` door `scripts/vendor/icons.sh`. De sjablonen zetten ze
+in de pagina zelf, dus er wordt niets bij een derde partij opgehaald.
+
+| Item | Pin | Herhaald in |
+| --- | --- | --- |
+| `Lucide` | 1.47.0 (release van 2026-09-17 op github.com/lucide-icons/lucide; gecontroleerd 2026-09-20) | `static/icons/lucide/PROVENANCE.md`, `scripts/vendor/icons.sh` |
+
 ## Huisstijl
 
 De huisstijl is van het bedrijf en staat vast in `docs/huisstijl.md`. De
