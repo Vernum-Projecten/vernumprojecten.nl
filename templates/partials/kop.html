@@ -1,0 +1,22 @@
+{# SPDX-FileCopyrightText: Vernum Projecten B.V. #}
+{# SPDX-License-Identifier: Apache-2.0 #}
+{#
+  De paginakop: de lockup links op 28 px hoog, de navigatie rechts
+  (docs/huisstijl.md, sectie 6). Op een smal scherm vouwt de navigatie onder
+  de lockup, want beide staan in dezelfde flexrij.
+#}
+<header class="kop">
+  <div class="schil kop__binnen">
+    <a class="kop__merk" href="{{ get_url(path='@/_index.md') }}">
+      {% include "partials/lockup.html" %}
+    </a>
+    <nav class="navigatie" aria-label="Hoofdmenu">
+      {%- for item in config.extra.navigatie %}
+      <a
+        href="{{ get_url(path=item.pad, trailing_slash=true) }}"
+        {%- if current_path is defined and current_path == item.pad %} aria-current="page"{% endif -%}
+      >{{ item.naam }}</a>
+      {%- endfor %}
+    </nav>
+  </div>
+</header>

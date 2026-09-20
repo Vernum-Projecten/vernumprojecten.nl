@@ -11,6 +11,19 @@ en de versienummering volgt [Semantic Versioning 2.0.0](https://semver.org/lang/
 
 ### Toegevoegd
 
+- De site zelf: vijf pagina's in het Nederlands (Home, Diensten, Werkwijze,
+  Over, Contact, Privacy) en een 404, gebouwd door Zola uit Tera-sjablonen.
+  Geen JavaScript, geen cookie, geen bestand van een andere oorsprong.
+- De huisstijl op de site: het palet en de twee lettertypen als Sass-partials,
+  het merkteken als favicon, de lockup in de paginakop, de banner als
+  `og:image`. `docs/huisstijl.md` legt vast wat de site ervan gebruikt en
+  `scripts/checks/brand-contrast.sh` meet elk kleurtoken.
+- Inter 4.1 gevendord onder `static/fonts/inter/`, met zijn licentie, een
+  `PROVENANCE.md` en een `SHA256SUMS` die `scripts/checks/versions.sh`
+  nakijkt.
+- `docs/publiceren.md`: hoe de site op het domein komt en hoe de repository
+  daarvoor is ingesteld.
+
 - De werkafspraken van de repository: `CLAUDE.md`, de regels onder
   `.claude/rules/` (schrijfstijl, CI en publiceren, commentaar, de
   issue-loop), de twee hooks die per bewerking meekijken, en de controles

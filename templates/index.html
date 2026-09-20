@@ -1,0 +1,18 @@
+{# SPDX-FileCopyrightText: Vernum Projecten B.V. #}
+{# SPDX-License-Identifier: Apache-2.0 #}
+{#
+  De startpagina. De `title` van de sectie is de naam van het bedrijf, want
+  dat is wat er in de tabbladtitel hoort; de kop op de pagina zelf zegt wat
+  het bedrijf doet en staat in `extra.kop`.
+#}
+{% extends "base.html" %}
+
+{% block inhoud %}
+<div class="tekstkolom">
+  <header class="paginakop">
+    <p class="label">{{ config.extra.plaats }}</p>
+    <h1>{{ section.extra.kop | default(value=section.title) }}</h1>
+  </header>
+  {{ section.content | safe }}
+</div>
+{% endblock inhoud %}

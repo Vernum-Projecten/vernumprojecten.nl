@@ -1,0 +1,25 @@
+/* SPDX-FileCopyrightText: Vernum Projecten B.V.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Het palet van de huisstijl (docs/huisstijl.md), de ene bron voor
+ * merkkleuren. Elk token draagt een `safe:`-claim: waarvoor het op welke
+ * ondergrond mag worden gebruikt. WCAG 2.2 vraagt 4,5:1 voor lopende tekst en
+ * 3:1 voor een grafisch element of grote tekst;
+ * scripts/checks/brand-contrast.sh meet elk token tegen de twee ondergronden
+ * en faalt op een claim die niet meer klopt. Betekeniskleuren (goed, let op,
+ * fout) zijn geen merkkleuren en worden per oppervlak gedefinieerd, nooit
+ * hier.
+ *
+ * Dit bestand is de huisstijl zoals de eigenaar die vaststelde. Verander hier
+ * geen hex-waarde: de huisstijl is van het bedrijf en niet van deze site. */
+:root {
+  --huisstijl-mist: #F5F4EF;      /* lichte ondergrond; safe: ground-light */
+  --huisstijl-inkt: #15201B;      /* inkt en donkere ondergrond; safe: text-on-light ground-dark */
+  --huisstijl-loof: #1E5A44;      /* het merkgroen: tegel, koppen, links; safe: text-on-light graphic-on-light */
+  --huisstijl-blad: #7FBF9E;      /* het groen op donker; safe: text-on-dark graphic-on-dark */
+  --huisstijl-goud: #A67C1F;      /* accent op licht: balanspunt, totaalregel, zegel; safe: graphic-on-light graphic-on-dark */
+  --huisstijl-goud-licht: #D9B44A;/* accent op donker en op de tegel; safe: text-on-dark graphic-on-dark */
+  --huisstijl-leisteen: #586560;  /* gedempte tekst op licht; safe: text-on-light */
+  --huisstijl-nevel: #A7B1AB;     /* gedempte tekst op donker; safe: text-on-dark graphic-on-dark */
+  --huisstijl-zilver: #D8DAD4;    /* lijnen en randen op licht; safe: rule */
+}

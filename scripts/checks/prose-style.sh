@@ -7,7 +7,8 @@
 # script makes the word-level half of that rule a failing check. It scans the
 # first-party prose of the tree:
 #
-#   - every tracked *.md outside the rule file that lists the words;
+#   - every tracked *.md outside the rule file that lists the words. The
+#     vendored font licence has no .md extension, so it is never read;
 #   - every Tera template under templates/, where the Dutch a visitor reads
 #     lives;
 #   - config.toml, whose title and description reach the page;
@@ -43,7 +44,6 @@ in_scope() {
   local f="$1"
   [[ "$f" =~ $EXEMPT_RE ]] && return 1
   case "$f" in
-  assets/fonts/*) return 1 ;;
   config.toml) return 0 ;;
   *.md | *.html | *.scss | *.sh) return 0 ;;
   esac

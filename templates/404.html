@@ -1,0 +1,26 @@
+{# SPDX-FileCopyrightText: Vernum Projecten B.V. #}
+{# SPDX-License-Identifier: Apache-2.0 #}
+{#
+  De pagina die GitHub Pages toont voor een adres dat hier niet bestaat. Er is
+  geen `page` en geen `section`, dus base.html kiest daar de titel en de
+  canonieke URL. Elke URL hieronder is absoluut, want deze pagina wordt op
+  elke diepte van de site getoond.
+#}
+{% extends "base.html" %}
+
+{% block inhoud %}
+<div class="tekstkolom">
+  <header class="paginakop">
+    <p class="label">Foutmelding 404</p>
+    <h1>Deze pagina bestaat niet</h1>
+  </header>
+  <p>
+    Het adres dat je opvroeg staat niet op deze site. Misschien is de link oud,
+    of staat er een typefout in.
+  </p>
+  <p>
+    Ga naar de <a class="hoofdlink" href="{{ get_url(path='@/_index.md') }}">startpagina</a>,
+    of kies hierboven de pagina die je zocht.
+  </p>
+</div>
+{% endblock inhoud %}

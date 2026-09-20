@@ -1,0 +1,73 @@
+{# SPDX-FileCopyrightText: Vernum Projecten B.V. #}
+{# SPDX-License-Identifier: Apache-2.0 #}
+{#
+  De schil van elke pagina. Kop, inhoud, voet, en niets meer: geen script,
+  geen bestand van een andere oorsprong, geen teller.
+
+  De titel, de beschrijving en de canonieke URL komen uit de pagina zelf waar
+  die er is, en anders uit config.toml. De 404 heeft geen `page`, dus daar
+  vallen ze terug op de blokken die 404.html zet.
+#}
+{%- if page -%}
+  {%- set_global paginatitel = page.title -%}
+  {%- set_global paginabeschrijving = page.description | default(value=config.description) -%}
+  {%- set_global canoniek = page.permalink -%}
+{%- elif section -%}
+  {%- set_global paginatitel = section.title -%}
+  {%- set_global paginabeschrijving = section.description | default(value=config.description) -%}
+  {%- set_global canoniek = section.permalink -%}
+{%- else -%}
+  {#- De 404 is de enige pagina zonder `page` en zonder `section`. -#}
+  {%- set_global paginatitel = "Pagina niet gevonden" -%}
+  {%- set_global paginabeschrijving = config.description -%}
+  {%- set_global canoniek = config.base_url ~ "/404.html" -%}
+{%- endif -%}
+{%- if paginatitel == config.title -%}
+  {%- set_global volledige_titel = config.title -%}
+{%- else -%}
+  {%- set_global volledige_titel = paginatitel ~ " · " ~ config.title -%}
+{%- endif -%}
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ volledige_titel }}</title>
+    <meta name="description" content="{{ paginabeschrijving }}" />
+    <link rel="canonical" href="{{ canoniek }}" />
+
+    <link rel="stylesheet" href="{{ get_url(path='site.css') }}" />
+
+    {# Het merkteken als favicon, in de vier vormen die een browser vraagt. #}
+    <link rel="icon" href="{{ get_url(path='favicon.svg') }}" type="image/svg+xml" />
+    <link rel="icon" href="{{ get_url(path='favicon-32.png') }}" sizes="32x32" type="image/png" />
+    <link rel="icon" href="{{ get_url(path='favicon-16.png') }}" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="{{ get_url(path='apple-touch-icon.png') }}" />
+
+    {# De twee merkkleuren als adresbalkkleur, licht en donker. #}
+    <meta name="theme-color" content="#F5F4EF" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#15201B" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ config.title }}" />
+    <meta property="og:locale" content="nl_NL" />
+    <meta property="og:title" content="{{ volledige_titel }}" />
+    <meta property="og:description" content="{{ paginabeschrijving }}" />
+    <meta property="og:url" content="{{ canoniek }}" />
+    <meta property="og:image" content="{{ get_url(path='brand/vernum-projecten-social.png') }}" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="640" />
+    <meta property="og:image:alt" content="Het merkteken van Vernum Projecten B.V. naast de naam." />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <a class="overslaan" href="#inhoud">Naar de inhoud</a>
+    {% include "partials/kop.html" %}
+    <main id="inhoud" class="inhoud">
+      <div class="schil">
+        {% block inhoud %}{% endblock inhoud %}
+      </div>
+    </main>
+    {% include "partials/voet.html" %}
+  </body>
+</html>

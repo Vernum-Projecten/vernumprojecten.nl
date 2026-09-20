@@ -1,0 +1,391 @@
+/* SPDX-FileCopyrightText: Vernum Projecten B.V.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * De ene stylesheet van vernumprojecten.nl. Zola compileert dit bestand naar
+ * /site.css; er is geen tweede bouwgereedschap en geen JavaScript.
+ *
+ * De kleuren, het lettertype, de typeschaal en het raster komen uit de
+ * huisstijl (docs/huisstijl.md): basiseenheid 4 px, afstanden uit 8, 12, 16,
+ * 24, 32 en 48, hoekradius 6, geen schaduwen. Scheiding komt van ruimte en
+ * van één zilveren lijn. Waar een pagina meer lucht vraagt dan 48 px,
+ * gebruikt zij 64 of 96: veelvouden van dezelfde eenheid. Geen specificatie
+ * schrijft dat voor; het is eigen ontwerp op de maat die de huisstijl geeft.
+ *
+ * De toegankelijkheidseis is WCAG 2.2 op niveau AA
+ * (https://www.w3.org/TR/WCAG22/): 4,5:1 voor lopende tekst, 3:1 voor een
+ * grafisch element, een zichtbare focus, en een pagina die op 320 px breed
+ * leesbaar blijft zonder horizontaal te schuiven. */
+
+@import "huisstijl-tokens";
+@import "huisstijl-fonts";
+
+// De rollen die de pagina gebruikt, uitgedrukt in de merktokens. Het donkere
+// thema wisselt alleen deze rollen om; geen regel hieronder noemt een tweede
+// kleur (docs/huisstijl.md, sectie 4).
+:root {
+  --grond: var(--huisstijl-mist);
+  --tekst: var(--huisstijl-inkt);
+  --merk: var(--huisstijl-loof);
+  --gedempt: var(--huisstijl-leisteen);
+  --lijn: var(--huisstijl-zilver);
+  --accent: var(--huisstijl-goud);
+
+  --ruimte-1: 0.5rem;
+  --ruimte-2: 0.75rem;
+  --ruimte-3: 1rem;
+  --ruimte-4: 1.5rem;
+  --ruimte-5: 2rem;
+  --ruimte-6: 3rem;
+  --ruimte-7: 4rem;
+  --ruimte-8: 6rem;
+
+  // De schil is net iets breder dan de tekstkolom, zodat de kop, de tekst en
+  // de voet dezelfde linker- en rechterrand delen. Een bredere schil zet de
+  // navigatie ver rechts van een tekst die op 36 rem ophoudt, en dat leest
+  // als een pagina die half leeg is.
+  --breedte-schil: 42rem;
+  --breedte-tekst: 36rem;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --grond: var(--huisstijl-inkt);
+    --tekst: var(--huisstijl-mist);
+    --merk: var(--huisstijl-blad);
+    --gedempt: var(--huisstijl-nevel);
+    --lijn: rgba(167, 177, 171, 0.3);
+    --accent: var(--huisstijl-goud-licht);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  // Een anker springt niet tot onder de bovenrand van het venster.
+  scroll-padding-top: var(--ruimte-5);
+}
+
+body {
+  margin: 0;
+  background: var(--grond);
+  color: var(--tekst);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  // Geen horizontale schuifbalk op een smal scherm, wat er ook in een tabel
+  // of een lange URL staat.
+  overflow-wrap: break-word;
+}
+
+// De schil: één breedte, één goot van 16 px links en rechts.
+.schil {
+  width: 100%;
+  max-width: var(--breedte-schil);
+  margin-inline: auto;
+  padding-inline: var(--ruimte-3);
+}
+
+// Lopende tekst blijft onder 72 tekens per regel (huisstijl, sectie 5).
+.tekstkolom {
+  max-width: var(--breedte-tekst);
+}
+
+// Typografie -----------------------------------------------------------------
+
+h1,
+h2,
+h3 {
+  color: var(--merk);
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0 0 var(--ruimte-3);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: 2rem;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: var(--ruimte-6);
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin-top: var(--ruimte-5);
+}
+
+p,
+ul,
+ol,
+dl {
+  margin: 0 0 var(--ruimte-4);
+}
+
+ul,
+ol {
+  padding-left: 1.25rem;
+}
+
+li + li {
+  margin-top: var(--ruimte-1);
+}
+
+strong {
+  font-weight: 600;
+}
+
+// Het label in kapitalen: 12 px, letterafstand 0,04 em (huisstijl, sectie 5).
+.label {
+  display: block;
+  margin-bottom: var(--ruimte-1);
+  color: var(--gedempt);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.inleiding {
+  font-size: 1.125rem;
+  color: var(--tekst);
+}
+
+.gedempt {
+  color: var(--gedempt);
+  font-size: 0.875rem;
+}
+
+// Links ----------------------------------------------------------------------
+
+a {
+  color: var(--merk);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+// De ene link die op een pagina telt. Goud is het accent van de huisstijl en
+// mag geen tekstkleur zijn op licht (3,45:1), dus het draagt alleen de lijn
+// eronder; de tekst blijft de merkkleur.
+.hoofdlink {
+  display: inline-block;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 2px;
+}
+
+.hoofdlink:hover {
+  border-bottom-width: 3px;
+  padding-bottom: 1px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--merk);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+// De sprong naar de inhoud, zichtbaar zodra hij focus krijgt.
+.overslaan {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1;
+  padding: var(--ruimte-2) var(--ruimte-3);
+  background: var(--grond);
+  color: var(--merk);
+  border: 1px solid var(--lijn);
+  border-radius: 6px;
+}
+
+.overslaan:focus {
+  left: var(--ruimte-3);
+  top: var(--ruimte-3);
+}
+
+// Kop ------------------------------------------------------------------------
+
+.kop {
+  border-bottom: 1px solid var(--lijn);
+}
+
+.kop__binnen {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ruimte-3) var(--ruimte-5);
+  padding-block: var(--ruimte-4);
+}
+
+.kop__merk {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+// De auto-lockup staat op 28 px hoog (huisstijl, sectie 6). De breedte volgt
+// uit de verhouding van het bestand, dus er wordt niets uitgerekt.
+.kop__lockup {
+  display: block;
+  height: 28px;
+  width: auto;
+}
+
+.navigatie {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ruimte-2) var(--ruimte-4);
+  margin-left: auto;
+  font-size: 0.9375rem;
+}
+
+.navigatie a {
+  color: var(--gedempt);
+  text-decoration: none;
+}
+
+.navigatie a:hover {
+  color: var(--merk);
+  text-decoration: underline;
+}
+
+.navigatie a[aria-current="page"] {
+  color: var(--tekst);
+  font-weight: 500;
+}
+
+// Inhoud ---------------------------------------------------------------------
+
+.inhoud {
+  padding-block: var(--ruimte-7) var(--ruimte-8);
+}
+
+.paginakop {
+  margin-bottom: var(--ruimte-6);
+}
+
+// Een blok met een lijn erboven: de enige scheiding die de huisstijl kent.
+.blok + .blok {
+  margin-top: var(--ruimte-6);
+  padding-top: var(--ruimte-6);
+  border-top: 1px solid var(--lijn);
+}
+
+.blok h2:first-child,
+.blok h3:first-child {
+  margin-top: 0;
+}
+
+// De gegevenslijst van de contactpagina: label links, waarde rechts, op een
+// smal scherm onder elkaar.
+.gegevens {
+  margin: 0 0 var(--ruimte-4);
+}
+
+.gegevens div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ruimte-1) var(--ruimte-3);
+  padding-block: var(--ruimte-2);
+  border-top: 1px solid var(--lijn);
+}
+
+.gegevens div:last-child {
+  border-bottom: 1px solid var(--lijn);
+}
+
+// Breed genoeg voor het langste label, "Btw-identificatienummer", zodat geen
+// enkel label over twee regels valt naast een waarde van één regel.
+.gegevens dt {
+  flex: 0 0 11.5rem;
+  color: var(--gedempt);
+  font-size: 0.875rem;
+}
+
+.gegevens dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+// Onder deze breedte past een lange waarde niet meer naast zijn label, en
+// dan valt de ene rij wel en de andere niet. Hieronder staat elk label boven
+// zijn waarde, zodat alle rijen dezelfde vorm hebben.
+@media (max-width: 34rem) {
+  .gegevens dt {
+    flex: 0 0 100%;
+  }
+}
+
+// Voet -----------------------------------------------------------------------
+
+.voet {
+  border-top: 1px solid var(--lijn);
+  padding-block: var(--ruimte-5) var(--ruimte-6);
+  color: var(--gedempt);
+  font-size: 0.875rem;
+}
+
+.voet__binnen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ruimte-3) var(--ruimte-6);
+  justify-content: space-between;
+}
+
+.voet p {
+  margin: 0 0 var(--ruimte-1);
+  max-width: 28rem;
+}
+
+.voet a {
+  color: var(--gedempt);
+}
+
+.voet a:hover {
+  color: var(--merk);
+}
+
+.voet__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ruimte-1) var(--ruimte-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// Wie het zonder beweging wil, krijgt het zonder beweging.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .kop,
+  .voet__links,
+  .overslaan {
+    display: none;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+}
