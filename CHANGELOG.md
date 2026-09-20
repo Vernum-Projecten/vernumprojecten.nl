@@ -22,3 +22,5 @@ en de versienummering volgt [Semantic Versioning 2.0.0](https://semver.org/lang/
   zet.
 - `NOTICE`, `.editorconfig`, `.gitattributes`, `.gitignore` en een
   Dependabot-configuratie voor de actions.
+- `SECURITY.md`: wat er te melden valt, hoe je meldt (de private meldknop van
+  GitHub staat aan voor deze repository) en wat je terugkrijgt.
