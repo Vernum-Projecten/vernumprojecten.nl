@@ -68,17 +68,19 @@ scripts/gh/fields.sh new <type> <priority> [effort] <gh issue create args…>
 
 Labels carry the rest, and the set is small on purpose: `documentation`,
 `chore`, `ci`, `content` (the words on a page), `design` (the look of one),
-`dependencies`, `no-changelog`.
+`accessibility`, `dependencies`, `no-changelog`. The set lives in
+`scripts/gh/labels.sh`; add a label there and run the script, never in the
+web interface alone, or the file stops describing the tracker.
 
 ## Milestones are releases
 
 **Every issue carries a milestone, with no exception.** A milestone is
 described by what it carries, never by a phase and never by a season:
 
-| Milestone | What it carries |
-| --- | --- |
-| `v0.1.0` | the site live on the custom domain, with the five pages and the 404 |
-| `v0.2.0` | what the owner confirms after reading the live site |
+| Milestone | Due | What it carries |
+| --- | --- | --- |
+| `v0.1.0` | 2026-09-27 | the site live on the custom domain, and the facts the law asks for confirmed by the owner |
+| `v0.2.0` | 2026-10-04 | what the owner wants changed after reading the live site, and what the site still lacks |
 
 A milestone is cut when it reaches zero open issues, or when the owner calls
 the cut. Work that waits on somebody else (an address to confirm, DNS at the
