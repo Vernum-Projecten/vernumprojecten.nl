@@ -1,0 +1,8 @@
+# Reporting a security problem in this website. The repository is public,
+# so GitHub's private reporting button is the preferred route; SECURITY.md
+# says what is in scope. Write in Dutch or English.
+Contact: mailto:info@vernumprojecten.nl
+Expires: 2027-09-20T00:00:00Z
+Preferred-Languages: nl, en
+Canonical: https://vernumprojecten.nl/.well-known/security.txt
+Policy: https://github.com/Vernum-Projecten/vernumprojecten.nl/blob/main/SECURITY.md
