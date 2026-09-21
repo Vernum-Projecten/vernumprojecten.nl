@@ -56,3 +56,18 @@ gh run list --workflow=pages.yml --limit 5
 Het certificaat van GitHub vernieuwt zichzelf. Loopt de datum hierboven af
 zonder dat er een nieuwe in de plaats komt, dan is er iets met de DNS-records
 gebeurd en zegt het antwoord van de eerste opdracht wat.
+
+## De meldroute vernieuwen
+
+`static/.well-known/security.txt` staat op het pad dat RFC 9116 vastlegt en
+draagt een `Expires`. Dat veld loopt af op **2027-09-20**. Een bestand met een
+verlopen `Expires` zegt een melder dat de route verlaten is, dus dat is erger
+dan geen bestand.
+
+Zet de datum uiterlijk een maand voor die dag een jaar vooruit, in dezelfde
+pull request als niets anders, en lees daarna
+`curl -s https://vernumprojecten.nl/.well-known/security.txt` terug. Het
+programma op `boekhouding.vernumprojecten.nl` draagt hetzelfde bestand met
+dezelfde datum; daar faalt een test zodra de dag voorbij is
+(`app/vernumboek-web/tests/it/disclosure.rs` in de VernumBOEK-repository), dus
+die kant meldt zich vanzelf. Deze kant niet: dit stuk tekst is de herinnering.
