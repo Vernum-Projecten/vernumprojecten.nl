@@ -208,6 +208,31 @@ else
   note "no static/icons/lucide/SHA256SUMS yet, skipped"
 fi
 
+echo "== the terms (static/voorwaarden/ <-> docs/VERSIONS.md)"
+want_terms="$(pin_of "NLdigital Voorwaarden" docs/VERSIONS.md)"
+if [ -z "$want_terms" ]; then
+  bad "docs/VERSIONS.md has no 'NLdigital Voorwaarden' row"
+elif [ ! -f static/voorwaarden/PROVENANCE.md ]; then
+  note "no static/voorwaarden/PROVENANCE.md yet, skipped"
+elif ! /usr/bin/grep -qF "NLdigital Voorwaarden $want_terms" static/voorwaarden/PROVENANCE.md; then
+  bad "static/voorwaarden/PROVENANCE.md does not name the edition $want_terms"
+elif ! /usr/bin/grep -qF "NLdigital Voorwaarden $want_terms" content/voorwaarden.md; then
+  bad "content/voorwaarden.md does not name the edition $want_terms"
+else
+  note "OK: NLdigital Voorwaarden $want_terms"
+fi
+# The PDFs are the publisher's copyrighted text and may not be altered, so a
+# file that was replaced by hand is caught here and not by a client.
+if [ -f static/voorwaarden/SHA256SUMS ]; then
+  if (cd static/voorwaarden && shasum -a 256 -c SHA256SUMS >/dev/null 2>&1); then
+    note "OK: the NLdigital PDFs match SHA256SUMS"
+  else
+    bad "static/voorwaarden/ does not match its own SHA256SUMS"
+  fi
+else
+  note "no static/voorwaarden/SHA256SUMS yet, skipped"
+fi
+
 echo "== licence (LICENSE <-> SPDX headers)"
 if [ -f LICENSE ]; then
   stale=0

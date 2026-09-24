@@ -68,6 +68,5 @@ Zet de datum uiterlijk een maand voor die dag een jaar vooruit, in dezelfde
 pull request als niets anders, en lees daarna
 `curl -s https://vernumprojecten.nl/.well-known/security.txt` terug. Het
 programma op `boekhouding.vernumprojecten.nl` draagt hetzelfde bestand met
-dezelfde datum; daar faalt een test zodra de dag voorbij is
-(`app/vernumboek-web/tests/it/disclosure.rs` in de VernumBOEK-repository), dus
-die kant meldt zich vanzelf. Deze kant niet: dit stuk tekst is de herinnering.
+dezelfde datum; daar faalt een test zodra de dag voorbij is, dus die kant
+meldt zich vanzelf. Deze kant niet: dit stuk tekst is de herinnering.

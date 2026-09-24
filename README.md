@@ -75,27 +75,24 @@ bedrag uit een overeenkomst, geen bankgegeven, geen factuur.
 ## De privacyverklaring en de voorwaarden
 
 `/privacy/` is de verklaring onder de AVG en noemt per verwerking het artikel
-waar zij op rust. `/voorwaarden/` draagt de algemene voorwaarden en staat
-gemarkeerd als concept: de tekst is nog niet vastgesteld. Twee dingen die bij
-het schrijven zijn nagekeken, met de datum erbij:
+waar zij op rust. `/voorwaarden/` verklaart de NLdigital Voorwaarden 2025 van
+toepassing en biedt ze aan als download, in het Nederlands en in het Engels.
+De twee PDF's staan onder `static/voorwaarden/`, met een `PROVENANCE.md` en
+een `SHA256SUMS` die `scripts/checks/versions.sh` nakijkt. Wat erbij is
+nagekeken, met de datum erbij:
 
-- **De NLdigital Voorwaarden 2025 zijn niet vrij te gebruiken** (gelezen
-  20-09-2026 op
+- **De NLdigital Voorwaarden 2025 zijn gekocht en worden ongewijzigd
+  gebruikt** (gelezen 24-09-2026 op
   <https://www.nldigital.nl/kennis-producten/nldigital-voorwaarden-2025/>).
-  De pagina zegt "Gratis voor leden en vanaf €395,- (ex. btw) voor
-  niet-leden", en over wijzigen: "Nee, ze mogen niet inhoudelijk worden
-  aangepast. Op de NLdigital Voorwaarden 2025 rust namelijk het auteursrecht
-  van NLdigital." Een niet-lid koopt ze dus, of schrijft een eigen set. Het
-  concept op `/voorwaarden/` is die eigen set.
-- **Deponeren bij KVK kan nog steeds en is niet verplicht** (gelezen
-  20-09-2026 op
-  <https://www.kvk.nl/deponeren/algemene-voorwaarden-deponeren/>): "Je kunt de
-  algemene voorwaarden van je organisatie bij KVK of de rechtbank deponeren.
-  Dit is niet verplicht, maar kan in verschillende situaties handig zijn." KVK
-  rekent een tarief per document per kalenderjaar. Deponeren vervangt het
-  ter hand stellen niet: artikel 6:234 van het Burgerlijk Wetboek vraagt dat
-  de voorwaarden voor of bij het sluiten van de overeenkomst aan de wederpartij
-  worden gegeven.
+  Het auteursrecht ligt bij NLdigital; de tekst mag niet inhoudelijk worden
+  aangepast en niet van een eigen logo worden voorzien. NLdigital heeft ze
+  gedeponeerd bij de rechtbank Midden-Nederland, locatie Utrecht, dus een
+  eigen depot is niet nodig. De verzekeraar vroeg om deze branchevoorwaarden.
+- **Publiceren op de site vervangt het ter hand stellen niet:** artikel 6:234
+  van het Burgerlijk Wetboek vraagt dat de voorwaarden voor of bij het sluiten
+  van de overeenkomst aan de wederpartij worden gegeven. Elke offerte krijgt
+  de PDF als bijlage en de zin dat de NLdigital Voorwaarden 2025 van
+  toepassing zijn; de pagina zegt dat ook.
 
 ## Indeling van de repository
 
