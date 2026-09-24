@@ -45,3 +45,13 @@ schrijven.
 
 De Engelse versie zegt op pagina 1 dat bij een verschil in uitleg de
 Nederlandse tekst voorgaat.
+
+## De handleiding
+
+Bij de aankoop hoort een handleiding van NLdigital voor de leverancier: hoe
+je de voorwaarden van toepassing verklaart, wat je met de tekst niet mag en
+wat de hoofdstukken doen. Zij is voor ons geschreven en niet voor een klant,
+dus zij staat niet in `static/` en de site levert haar niet uit. Zij staat in
+`docs/nldigital/Handleiding-NLdigital-Voorwaarden-2025.pdf`, 7 pagina's,
+gedateerd 2025-11-28, sha256
+`fed688b14c95c4953f4c4909dc938b3030c89f68b65c7ef5cbede75c2f84ea18`.

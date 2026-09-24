@@ -103,7 +103,7 @@ nagekeken, met de datum erbij:
 | `templates/` | de Tera-sjablonen: de schil, de twee paginavormen, de onderdelen |
 | `sass/` | de ene stylesheet, plus het palet en de lettertypen van de huisstijl |
 | `static/` | wat ongewijzigd meegaat: merkbestanden, favicons, de webfonts, `CNAME` |
-| `docs/` | de versiematrix, de huisstijl en hoe er gepubliceerd wordt |
+| `docs/` | de versiematrix, de huisstijl, hoe er gepubliceerd wordt, en onder `nldigital/` de handleiding van de uitgever bij de voorwaarden |
 | `scripts/checks/` | de controles die per bewerking en in CI draaien |
 | `.github/workflows/` | `ci.yml` (de controles) en `pages.yml` (bouwen en publiceren) |
 
