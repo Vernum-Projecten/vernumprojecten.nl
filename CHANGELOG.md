@@ -19,10 +19,12 @@ en de versienummering volgt [Semantic Versioning 2.0.0](https://semver.org/lang/
   gezet. Er wordt niets bij een derde partij opgehaald.
 - Een foto op de pagina Over, bijgesneden en verkleind tot 600 en 1200 px
   breed.
-- `/voorwaarden/`: de algemene voorwaarden, gemarkeerd als concept tot de
-  eigenaar ze vaststelt. De NLdigital Voorwaarden 2025 zijn niet gebruikt,
-  omdat een niet-lid ze koopt vanaf € 395 en ze niet mag aanpassen (gelezen
-  20-09-2026). De pagina staat in de voet van elke pagina.
+- `/voorwaarden/`: de NLdigital Voorwaarden 2025 zijn van toepassing op
+  elke aanbieding en overeenkomst. De pagina zegt dat, biedt de Nederlandse
+  en de Engelse PDF aan vanaf de eigen oorsprong en noemt het depot bij de
+  rechtbank Midden-Nederland. De bestanden staan onder `static/voorwaarden/`
+  met hun herkomst en `SHA256SUMS`. Het eerdere eigen concept is vervangen.
+  De pagina staat in de voet van elke pagina.
 - De site zelf: vijf pagina's in het Nederlands (Home, Diensten, Werkwijze,
   Over, Contact, Privacy) en een 404, gebouwd door Zola uit Tera-sjablonen.
   Geen JavaScript, geen cookie, geen bestand van een andere oorsprong.

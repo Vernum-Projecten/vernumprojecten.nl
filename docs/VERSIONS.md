@@ -115,6 +115,18 @@ in de pagina zelf, dus er wordt niets bij een derde partij opgehaald.
 | --- | --- | --- |
 | `Lucide` | 1.47.0 (release van 2026-09-17 op github.com/lucide-icons/lucide; gecontroleerd 2026-09-20) | `static/icons/lucide/PROVENANCE.md`, `scripts/vendor/icons.sh` |
 
+## Algemene voorwaarden
+
+De NLdigital Voorwaarden staan als twee PDF's onder `static/voorwaarden/`,
+byte voor byte zoals NLdigital ze levert, met hun `SHA256SUMS`. De pagina
+`/voorwaarden/` verklaart ze van toepassing en linkt de bestanden. Een nieuwe
+editie vervangt de bestanden, schrijft `SHA256SUMS` opnieuw en verandert deze
+rij mee.
+
+| Item | Pin | Herhaald in |
+| --- | --- | --- |
+| `NLdigital Voorwaarden` | 2025 (PDF gedateerd 2025-10-06, gekocht bij nldigital.nl; gecontroleerd 2026-09-24) | `static/voorwaarden/PROVENANCE.md`, `content/voorwaarden.md` |
+
 ## Huisstijl
 
 De huisstijl is van het bedrijf en staat vast in `docs/huisstijl.md`. De
