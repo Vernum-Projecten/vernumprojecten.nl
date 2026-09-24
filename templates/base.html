@@ -7,6 +7,10 @@
   De titel, de beschrijving en de canonieke URL komen uit de pagina zelf waar
   die er is, en anders uit config.toml. De 404 heeft geen `page`, dus daar
   vallen ze terug op de blokken die 404.html zet.
+
+  De site is er in twee talen. `lang` is de taal van deze pagina, de strings
+  van het sjabloon komen met `trans` uit config.toml, en de vertaling van de
+  pagina staat in `page.translations` of `section.translations`.
 #}
 {%- if page -%}
   {%- set_global paginatitel = page.title -%}
@@ -18,23 +22,43 @@
   {%- set_global canoniek = section.permalink -%}
 {%- else -%}
   {#- De 404 is de enige pagina zonder `page` en zonder `section`. -#}
-  {%- set_global paginatitel = "Pagina niet gevonden" -%}
+  {%- set_global paginatitel = trans(key="niet_gevonden_titel") -%}
   {%- set_global paginabeschrijving = config.description -%}
   {%- set_global canoniek = config.base_url ~ "/404.html" -%}
 {%- endif -%}
+{#- De vertaling van deze pagina, voor de taalwissel in de kop en de
+    hreflang-links hieronder. `translations` noemt ook de pagina zelf, dus
+    de andere taal is de ene die niet `lang` is. -#}
+{%- set_global vertaling = false -%}
+{%- if page -%}
+  {%- set vertalingen = page.translations -%}
+{%- elif section -%}
+  {%- set vertalingen = section.translations -%}
+{%- else -%}
+  {%- set vertalingen = [] -%}
+{%- endif -%}
+{%- for t in vertalingen -%}
+  {%- if t.lang != lang -%}{%- set_global vertaling = t -%}{%- endif -%}
+{%- endfor -%}
 {%- if paginatitel == config.title -%}
   {%- set_global volledige_titel = config.title -%}
 {%- else -%}
   {%- set_global volledige_titel = paginatitel ~ " · " ~ config.title -%}
 {%- endif -%}
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="{{ lang }}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ volledige_titel }}</title>
     <meta name="description" content="{{ paginabeschrijving }}" />
     <link rel="canonical" href="{{ canoniek }}" />
+    {%- if vertaling %}
+    {# NOTE: https://developers.google.com/search/docs/specialty/international/localized-versions; the Dutch page is the x-default. #}
+    <link rel="alternate" hreflang="{{ lang }}" href="{{ canoniek }}" />
+    <link rel="alternate" hreflang="{{ vertaling.lang }}" href="{{ vertaling.permalink }}" />
+    <link rel="alternate" hreflang="x-default" href="{% if lang == config.default_language %}{{ canoniek }}{% else %}{{ vertaling.permalink }}{% endif %}" />
+    {%- endif %}
 
     <link rel="stylesheet" href="{{ get_url(path='site.css') }}" />
 
@@ -50,18 +74,18 @@
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="{{ config.title }}" />
-    <meta property="og:locale" content="nl_NL" />
+    <meta property="og:locale" content="{{ trans(key="locale") }}" />
     <meta property="og:title" content="{{ volledige_titel }}" />
     <meta property="og:description" content="{{ paginabeschrijving }}" />
     <meta property="og:url" content="{{ canoniek }}" />
     <meta property="og:image" content="{{ get_url(path='brand/vernum-projecten-social.png') }}" />
     <meta property="og:image:width" content="1280" />
     <meta property="og:image:height" content="640" />
-    <meta property="og:image:alt" content="Het merkteken van Vernum Projecten B.V. naast de naam." />
+    <meta property="og:image:alt" content="{{ trans(key="social_alt") }}" />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
-    <a class="overslaan" href="#inhoud">Naar de inhoud</a>
+    <a class="overslaan" href="#inhoud">{{ trans(key="naar_inhoud") }}</a>
     {% include "partials/kop.html" %}
     <main id="inhoud" class="inhoud">
       {% block inhoud %}{% endblock inhoud %}

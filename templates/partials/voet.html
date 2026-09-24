@@ -13,14 +13,14 @@
       <ul class="voet__feiten">
         <li><strong>{{ config.extra.bedrijf }}</strong></li>
         <li>{{ config.extra.plaats }}</li>
-        <li>KVK {{ config.extra.kvk }}</li>
-        <li>Btw {{ config.extra.btw }}</li>
+        <li>{{ trans(key="kvk") }} {{ config.extra.kvk }}</li>
+        <li>{{ trans(key="btw") }} {{ config.extra.btw }}</li>
       </ul>
       <p class="voet__rechten">&copy; {{ config.extra.jaar }} {{ config.extra.bedrijf }}</p>
     </div>
     <ul class="voet__links">
       {%- for item in config.extra.voetlinks %}
-      <li><a href="{{ get_url(path=item.pad, trailing_slash=true) }}">{{ item.naam }}</a></li>
+      <li><a href="{{ get_url(path=item.pad, lang=lang, trailing_slash=true) }}">{{ trans(key=item.sleutel) }}</a></li>
       {%- endfor %}
     </ul>
   </div>

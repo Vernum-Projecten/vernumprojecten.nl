@@ -19,7 +19,7 @@
       <p class="label">{{ config.extra.plaats }}</p>
       <h1>{{ section.extra.kop | default(value=section.title) }}</h1>
       <p class="inleiding">{{ section.extra.opening }}</p>
-      <a class="knop" href="{{ get_url(path=section.extra.actie_pad) }}">
+      <a class="knop" href="{{ get_url(path=section.extra.actie_pad, lang=lang) }}">
         {{ <icoon naam="mail" /> }}
         <span>{{ section.extra.actie_tekst }}</span>
       </a>
@@ -29,7 +29,7 @@
       src="{{ get_url(path='brand/huisstijl-icon-auto.svg') }}"
       width="64"
       height="64"
-      alt="Het merkteken van {{ config.extra.bedrijf }}: een V van twee armen met een gouden punt eronder."
+      alt="{{ trans(key="merk_alt") }}"
     />
   </div>
 </section>
@@ -46,8 +46,8 @@
       </li>
       {%- endfor %}
     </ul>
-    <a class="verderlink" href="{{ get_url(path='@/diensten.md') }}">
-      <span>Alle diensten</span>
+    <a class="verderlink" href="{{ get_url(path='@/diensten.md', lang=lang) }}">
+      <span>{{ trans(key="alle_diensten") }}</span>
       {{ <icoon naam="arrow-right" /> }}
     </a>
   </div>
@@ -64,7 +64,7 @@
     </li>
     {%- endfor %}
   </ol>
-  <a class="verderlink" href="{{ get_url(path='@/werkwijze.md') }}">
+  <a class="verderlink" href="{{ get_url(path='@/werkwijze.md', lang=lang) }}">
     <span>{{ section.extra.stappen_link_tekst }}</span>
     {{ <icoon naam="arrow-right" /> }}
   </a>
@@ -76,7 +76,7 @@
       <h2>{{ section.extra.slot_kop }}</h2>
       <p>{{ section.extra.slot_tekst }}</p>
     </div>
-    <a class="knop" href="{{ get_url(path=section.extra.actie_pad) }}">
+    <a class="knop" href="{{ get_url(path=section.extra.actie_pad, lang=lang) }}">
       {{ <icoon naam="mail" /> }}
       <span>{{ section.extra.actie_tekst }}</span>
     </a>

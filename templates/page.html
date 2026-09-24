@@ -81,7 +81,7 @@
     <p>{{ alinea | markdown(inline=true) | safe }}</p>
     {%- endfor %}
     <p>
-      <a class="knop" href="{% if blok.link_href %}{{ blok.link_href }}{% else %}{{ get_url(path=blok.pad) }}{% endif %}">
+      <a class="knop" href="{% if blok.link_href %}{{ blok.link_href }}{% else %}{{ get_url(path=blok.pad, lang=lang) }}{% endif %}">
         {{ <icoon naam="mail" /> }}
         <span>{{ blok.link_tekst }}</span>
       </a>

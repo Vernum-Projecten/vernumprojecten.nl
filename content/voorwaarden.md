@@ -14,11 +14,11 @@ de tekst ongewijzigd; het auteursrecht ligt bij NLdigital.
 
 ## Downloaden
 
-- [NLdigital Voorwaarden 2025, Nederlands (PDF, 22 pagina's)](/voorwaarden/nldigital-voorwaarden-2025-nl.pdf)
-- [NLdigital Terms 2025, Engels (PDF, 21 pagina's)](/voorwaarden/nldigital-terms-2025-en.pdf)
+[NLdigital Voorwaarden 2025 (PDF, 22 pagina's)](/voorwaarden/nldigital-voorwaarden-2025-nl.pdf)
 
-Verschillen de twee talen in uitleg, dan gaat de Nederlandse tekst voor. Dat
-staat op de eerste pagina van de Engelse versie.
+De Engelse vertaling staat op [de Engelse pagina](/en/terms/). Verschillen de
+twee talen in uitleg, dan gaat deze Nederlandse tekst voor. Dat staat op de
+eerste pagina van de Engelse versie.
 
 ## Hoe u ze ontvangt
 

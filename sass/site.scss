@@ -336,6 +336,35 @@ a:hover {
   padding-block: var(--ruimte-2);
 }
 
+// Rechts in de kop: het menu en de taalwissel naast elkaar. Het menupaneel
+// blijft aan de kop hangen, want die is `sticky` en dus de ankerbox.
+.kop__rechts {
+  display: flex;
+  align-items: center;
+  gap: var(--ruimte-1);
+}
+
+// De taalwissel: de code van de andere taal als kleine knop, 44 px hoog zodat
+// een vinger hem raakt.
+.taal {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--ruimte-2);
+  border: 1px solid var(--lijn);
+  border-radius: 6px;
+  color: var(--gedempt);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.taal:hover {
+  color: var(--merk);
+  border-color: var(--merk);
+}
+
 .merk {
   display: inline-flex;
   align-items: center;

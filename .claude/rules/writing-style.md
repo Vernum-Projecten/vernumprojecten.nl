@@ -27,19 +27,24 @@ to show").
 
 The split is by reader:
 
-- **Dutch: everything a visitor reads.** `content/**`, the strings in
-  `templates/**`, `config.toml`, `README.md`, `CHANGELOG.md`, `docs/**`, the
-  page titles, the alt texts, the footer.
-- **English: everything a developer reads.** Identifiers, template variable
-  names, comment lines, commit messages, pull-request and issue text,
-  `CLAUDE.md` and everything under `.claude/`.
+- **Dutch and English: everything a visitor reads.** The site is bilingual
+  (owner ruling 2026-09-24). A Dutch page in `content/naam.md` has an English
+  twin in `content/naam.en.md` that says the same; the strings a template
+  needs stand in the two `[translations]` tables of `config.toml`. The Dutch
+  page is the original and the English one follows it. The banned list below
+  applies to both.
+- **Dutch: what a developer reads in Dutch by tradition.** `README.md`,
+  `CHANGELOG.md`, `docs/**`.
+- **English: everything else a developer reads.** Identifiers, template
+  variable names, comment lines, commit messages, pull-request and issue
+  text, `CLAUDE.md` and everything under `.claude/`.
 - **English: what a CI run and a check script print.** Those lines are read
   while operating the repository, never while visiting the site, and they
-  appear interleaved with GitHub's own output, which is English. A line
-  becomes Dutch the moment a built page renders it.
+  appear interleaved with GitHub's own output, which is English.
 
-A Dutch string never lives in a shell script, and an English string never
-reaches a page.
+A Dutch string never lives in a shell script, and a literal string never
+lives in a template: a template takes its words from the page or from
+`trans`, so one template serves both languages.
 
 ## Banned tells
 
@@ -110,7 +115,7 @@ reaches a page.
 ## How to write instead
 
 - Address the reader as "u" in Dutch (owner ruling 2026-09-20), "you" in
-  English. The company is "wij" about itself, never "we" about the reader, and
+  English, on the site as well. The company is "wij" about itself, never "we" about the reader, and
   never "de gebruiker".
 - Use active voice. Name who does what.
 - Use present tense.
