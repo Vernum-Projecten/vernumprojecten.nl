@@ -3,7 +3,8 @@
 
 # De configuratie van Zola voor vernumprojecten.nl. De sleutels zijn die van
 # Zola zelf (https://www.getzola.org/documentation/getting-started/configuration/);
-# wat wij er zelf bij zetten staat onder [extra] en is Nederlands.
+# wat wij er zelf bij zetten staat onder [extra]; de woorden van de sjablonen
+# staan per taal onder [translations].
 
 base_url = "https://vernumprojecten.nl"
 title = "Vernum Projecten B.V."
@@ -47,6 +48,63 @@ smart_punctuation = false
 # een CI-run zegt niets over de link, dus die wordt niet als fout geteld.
 skip_anchor_prefixes = ["https://wetten.overheid.nl/"]
 
+# Twee talen. Nederlands is de standaard en staat op de wortel; Engels staat
+# onder /en/ (https://www.getzola.org/documentation/content/multilingual/).
+# Een pagina heeft in content/ twee bestanden, `naam.md` en `naam.en.md`, en
+# de Engelse krijgt een Engelse slug in zijn front matter.
+[languages.en]
+title = "Vernum Projecten B.V."
+description = "Vernum Projecten B.V. advises on IT, designs software and builds it, for organisations that run a process no package fits. Based in Groningen, the Netherlands."
+generate_feeds = false
+build_search_index = false
+taxonomies = []
+
+# De woorden die in een sjabloon staan en niet in een pagina: het menu, de
+# voet, de 404, de taalwissel. Elke sleutel staat in beide tabellen.
+[translations]
+taalnaam = "Nederlands"
+locale = "nl_NL"
+naar_inhoud = "Naar de inhoud"
+menu = "Menu"
+hoofdmenu = "Hoofdmenu"
+nav_diensten = "Diensten"
+nav_werkwijze = "Werkwijze"
+nav_over = "Over"
+nav_contact = "Contact"
+nav_privacy = "Privacy"
+nav_voorwaarden = "Voorwaarden"
+alle_diensten = "Alle diensten"
+kvk = "KVK"
+btw = "Btw"
+wissel_label = "Taal"
+wissel_naam = "English"
+wissel_titel = "Deze pagina in het Engels"
+merk_alt = "Het merkteken van Vernum Projecten B.V.: een V van twee armen met een gouden punt eronder."
+social_alt = "Het merkteken van Vernum Projecten B.V. naast de naam."
+niet_gevonden_titel = "Pagina niet gevonden"
+
+[languages.en.translations]
+taalnaam = "English"
+locale = "en_GB"
+naar_inhoud = "Skip to content"
+menu = "Menu"
+hoofdmenu = "Main menu"
+nav_diensten = "Services"
+nav_werkwijze = "Approach"
+nav_over = "About"
+nav_contact = "Contact"
+nav_privacy = "Privacy"
+nav_voorwaarden = "Terms"
+alle_diensten = "All services"
+kvk = "KVK"
+btw = "VAT"
+wissel_label = "Language"
+wissel_naam = "Nederlands"
+wissel_titel = "This page in Dutch"
+merk_alt = "The mark of Vernum Projecten B.V.: a V of two arms with a gold point beneath it."
+social_alt = "The mark of Vernum Projecten B.V. next to the name."
+niet_gevonden_titel = "Page not found"
+
 [extra]
 bedrijf = "Vernum Projecten B.V."
 plaats = "Groningen"
@@ -55,30 +113,32 @@ kvk = "42164990"
 btw = "NL869998894B01"
 email = "info@vernumprojecten.nl"
 
+# De navigatie en de voet wijzen naar een bronbestand, zodat get_url per taal
+# het juiste adres geeft; `sleutel` is de vertaalsleutel van de naam.
 [[extra.navigatie]]
-pad = "/diensten/"
-naam = "Diensten"
+pad = "@/diensten.md"
+sleutel = "nav_diensten"
 
 [[extra.navigatie]]
-pad = "/werkwijze/"
-naam = "Werkwijze"
+pad = "@/werkwijze.md"
+sleutel = "nav_werkwijze"
 
 [[extra.navigatie]]
-pad = "/over/"
-naam = "Over"
+pad = "@/over.md"
+sleutel = "nav_over"
 
 [[extra.navigatie]]
-pad = "/contact/"
-naam = "Contact"
+pad = "@/contact.md"
+sleutel = "nav_contact"
 
 [[extra.voetlinks]]
-pad = "/contact/"
-naam = "Contact"
+pad = "@/contact.md"
+sleutel = "nav_contact"
 
 [[extra.voetlinks]]
-pad = "/privacy/"
-naam = "Privacy"
+pad = "@/privacy.md"
+sleutel = "nav_privacy"
 
 [[extra.voetlinks]]
-pad = "/voorwaarden/"
-naam = "Voorwaarden"
+pad = "@/voorwaarden.md"
+sleutel = "nav_voorwaarden"

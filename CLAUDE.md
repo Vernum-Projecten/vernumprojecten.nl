@@ -5,8 +5,8 @@ company in Groningen. Three services, set by the owner on 2026-09-20:
 IT consulting, software design, and software development. Management and
 maintenance are not offered; a project ends with a handover, and what runs the
 software after that is the client's choice. The site is six pages and a 404,
-built by Zola from Tera templates and Dutch markdown, published on GitHub
-Pages at
+in Dutch at the root and in English under `/en/`, built by Zola from Tera
+templates and markdown, published on GitHub Pages at
 <https://vernumprojecten.nl>. It carries no JavaScript, no cookies, no
 analytics and no tracker, and the build output is the whole of what a visitor
 receives.
@@ -26,19 +26,28 @@ A company is named in full: **Vernum Projecten B.V.**, never the first word
 alone, because no company is registered under that word (owner ruling
 2026-09-18, inherited from the house style).
 
-## Language: Dutch for the visitor, English for the developer
+## Language: Dutch and English for the visitor, English for the developer
 
-The split is by reader, as in the sibling repository:
+The split is by reader, as in the sibling repository, with one addition: the
+site itself is bilingual (owner ruling 2026-09-24).
 
-- **Dutch:** every word a visitor reads. `content/**`, every string in
-  `templates/**`, `config.toml`, `README.md`, `CHANGELOG.md`, `docs/**`, the
-  page titles, the alt texts and the footer.
+- **Dutch, the default language:** every page under `content/*.md`, the
+  `[translations]` table in `config.toml`, `README.md`, `CHANGELOG.md`,
+  `docs/**`. Dutch sits at the root of the site.
+- **English, the second language:** every page under `content/*.en.md`, with
+  an English `slug` in its front matter, and the `[languages.en.translations]`
+  table. English sits under `/en/`. Every page exists in both languages, and
+  the English one says the same as the Dutch one; the Dutch page is the
+  original.
+- **No literal string in a template.** A word a visitor reads comes from the
+  page's front matter or from `trans(key=...)`, so the same template serves
+  both languages. Every link a template builds passes `lang=lang` to
+  `get_url`, so an English page links English pages.
 - **English:** identifiers, template variable names, shell scripts, the
   comment lines of every file, commit messages, pull-request and issue text,
   this file and everything under `.claude/`.
 - **English, and read while operating rather than visiting:** what a CI run
-  prints, and what the check scripts say. A line becomes Dutch the moment the
-  built page renders it.
+  prints, and what the check scripts say.
 
 Specification and product proper names stay as they are (`Zola`, `Tera`,
 `Sass`, `KVK`, `btw-id`).
@@ -85,9 +94,11 @@ rest stays out.
 
 ## Repo map
 
-- `config.toml`: the Zola configuration (Dutch), `base_url` and the site
-  metadata. No search index, no feed, no taxonomies.
-- `content/`: the pages in Dutch markdown, one file per page.
+- `config.toml`: the Zola configuration, `base_url`, the site metadata, the
+  `[languages.en]` block and the two `[translations]` tables. No search
+  index, no feed, no taxonomies.
+- `content/`: the pages in markdown, two files per page: `naam.md` in Dutch
+  and `naam.en.md` in English.
 - `templates/`: the Tera templates. `base.html` is the shell, `index.html`
   and `page.html` the two page shapes, `partials/` the header, the footer and
   the lockup.

@@ -11,6 +11,11 @@
   De naam staat als tekst naast het teken, niet als lockup-afbeelding: op een
   telefoon wordt die afbeelding een vlek van een paar millimeter. De `alt` van
   het teken is leeg, want de naam ernaast zegt hetzelfde in tekst.
+
+  Rechts staat de taalwissel: één link naar dezelfde pagina in de andere taal,
+  met `hreflang` en `lang` zodat een schermlezer de taal van de linktekst
+  kent. Hij staat buiten de `details`, zodat hij op een smal scherm naast de
+  menuknop blijft en niet in het paneel verdwijnt.
 #}
 
 <header class="kop">
@@ -26,19 +31,33 @@
       <span class="merk__naam">{{ config.extra.bedrijf }}</span>
     </a>
 
-    <details class="menu">
-      <summary class="menu__knop">
-        {{ <icoon naam="menu" /> }}
-        <span>Menu</span>
-      </summary>
-      <nav class="navigatie" aria-label="Hoofdmenu">
-        {%- for item in config.extra.navigatie %}
-        <a
-          href="{{ get_url(path=item.pad, trailing_slash=true) }}"
-          {%- if current_path is defined and current_path == item.pad %} aria-current="page"{% endif -%}
-        >{{ item.naam }}</a>
-        {%- endfor %}
-      </nav>
-    </details>
+    <div class="kop__rechts">
+      <details class="menu">
+        <summary class="menu__knop">
+          {{ <icoon naam="menu" /> }}
+          <span>{{ trans(key="menu") }}</span>
+        </summary>
+        <nav class="navigatie" aria-label="{{ trans(key="hoofdmenu") }}">
+          {%- for item in config.extra.navigatie %}
+          {%- set doel = get_url(path=item.pad, lang=lang, trailing_slash=true) %}
+          <a
+            href="{{ doel }}"
+            {%- if current_url is defined and current_url == doel %} aria-current="page"{% endif -%}
+          >{{ trans(key=item.sleutel) }}</a>
+          {%- endfor %}
+        </nav>
+      </details>
+
+      {%- if vertaling %}
+      <a
+        class="taal"
+        href="{{ vertaling.permalink }}"
+        hreflang="{{ vertaling.lang }}"
+        lang="{{ vertaling.lang }}"
+        title="{{ trans(key="wissel_titel") }}"
+        aria-label="{{ trans(key="wissel_label") }}: {{ trans(key="wissel_naam") }}"
+      >{{ vertaling.lang | upper }}</a>
+      {%- endif %}
+    </div>
   </div>
 </header>

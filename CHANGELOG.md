@@ -58,6 +58,13 @@ en de versienummering volgt [Semantic Versioning 2.0.0](https://semver.org/lang/
   GitHub staat aan voor deze repository) en wat je terugkrijgt.
 - `scripts/gh/labels.sh`: de labelset van de tracker als bestand, zodat hij
   niet alleen in de webinterface bestaat.
+- De site in het Engels onder `/en/`, met Engelse adressen (`/en/services/`,
+  `/en/approach/`, `/en/about/`, `/en/contact/`, `/en/privacy/`,
+  `/en/terms/`). Rechts in de kop staat een knop naar dezelfde pagina in de
+  andere taal, elke pagina draagt `hreflang`-links naar haar vertaling, en de
+  sitemap noemt beide talen. Nederlands blijft de standaard op de wortel. De
+  Nederlandse voorwaardenpagina linkt de Nederlandse PDF, de Engelse de
+  Engelse, elk met een verwijzing naar de andere.
 - `/privacy/` noemt privacy@vernumprojecten.nl als het adres voor een vraag
   over persoonsgegevens en voor een verzoek op grond van de AVG. De
   contactpagina houdt info@vernumprojecten.nl als algemeen adres.

@@ -5,6 +5,10 @@
   geen `page` en geen `section`, dus base.html kiest daar de titel en de
   canonieke URL. Elke URL hieronder is absoluut, want deze pagina wordt op
   elke diepte van de site getoond.
+
+  GitHub Pages kent één 404-pagina voor de hele site, dus deze staat in het
+  Nederlands met een Engelse regel eronder; er is geen manier om te weten in
+  welke taal de bezoeker las.
 #}
 {% extends "base.html" %}
 
@@ -22,6 +26,10 @@
       <a class="knop" href="{{ get_url(path='@/_index.md') }}">
         <span>Ga naar de startpagina</span>
       </a>
+    </p>
+    <p lang="en">
+      The address you requested is not on this site.
+      <a href="{{ get_url(path='@/_index.md', lang='en') }}">Go to the English start page</a>.
     </p>
   </div>
 </div>

@@ -5,7 +5,8 @@
 
 De website van Vernum Projecten B.V., een IT-bedrijf in Groningen:
 IT-advies, softwareontwerp en softwareontwikkeling. De site staat op
-<https://vernumprojecten.nl> en telt zes pagina's plus een 404.
+<https://vernumprojecten.nl> en telt zes pagina's plus een 404, in het
+Nederlands op de wortel en in het Engels onder `/en/`.
 
 De site is statisch. Er draait geen server van ons, er staat geen JavaScript
 in, er wordt geen cookie gezet en er is geen statistiekendienst. Wat je
@@ -98,8 +99,8 @@ nagekeken, met de datum erbij:
 
 | Pad | Wat er staat |
 | --- | --- |
-| `config.toml` | de configuratie van Zola, in het Nederlands |
-| `content/` | de pagina's als markdown |
+| `config.toml` | de configuratie van Zola, met de twee talen en de woorden van de sjablonen per taal |
+| `content/` | de pagina's als markdown, `naam.md` in het Nederlands en `naam.en.md` in het Engels |
 | `templates/` | de Tera-sjablonen: de schil, de twee paginavormen, de onderdelen |
 | `sass/` | de ene stylesheet, plus het palet en de lettertypen van de huisstijl |
 | `static/` | wat ongewijzigd meegaat: merkbestanden, favicons, de webfonts, `CNAME` |
