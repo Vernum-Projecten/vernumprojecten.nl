@@ -35,11 +35,11 @@ tekst = "De toepassing waarin uw team werkt, de koppeling tussen twee systemen, 
 
 [[extra.stappen]]
 titel = "Het eerste gesprek"
-tekst = "Wij stellen vragen tot wij uw proces kunnen navertellen, en sturen u toe wat wij begrepen hebben."
+tekst = "Het eerste gesprek is gratis en duurt hoogstens een uur. Wij stellen vragen tot wij uw proces kunnen navertellen, en sturen u toe wat wij begrepen hebben."
 
 [[extra.stappen]]
 titel = "Het ontwerp en het plan"
-tekst = "Wat gebouwd wordt ligt op papier, met wat er uitdrukkelijk niet in zit en met de prijs: per stap of per uur, vooraf afgesproken."
+tekst = "Wat gebouwd wordt ligt op papier, met wat er uitdrukkelijk niet in zit en met een vaste prijs per stap, vooraf afgesproken."
 
 [[extra.stappen]]
 titel = "Bouwen in stappen"

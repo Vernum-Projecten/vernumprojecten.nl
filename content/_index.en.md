@@ -35,11 +35,11 @@ tekst = "The application your team works in, the link between two systems, or th
 
 [[extra.stappen]]
 titel = "The first conversation"
-tekst = "We ask questions until we can retell your process, and send you what we understood."
+tekst = "The first conversation is free and lasts at most one hour. We ask questions until we can retell your process, and send you what we understood."
 
 [[extra.stappen]]
 titel = "The design and the plan"
-tekst = "What gets built is on paper, with what is expressly left out and with the price: per step or per hour, agreed in advance."
+tekst = "What gets built is on paper, with what is expressly left out and with a fixed price per step, agreed in advance."
 
 [[extra.stappen]]
 titel = "Building in steps"

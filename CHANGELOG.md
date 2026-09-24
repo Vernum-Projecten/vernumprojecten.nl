@@ -58,6 +58,11 @@ en de versienummering volgt [Semantic Versioning 2.0.0](https://semver.org/lang/
   GitHub staat aan voor deze repository) en wat je terugkrijgt.
 - `scripts/gh/labels.sh`: de labelset van de tracker als bestand, zodat hij
   niet alleen in de webinterface bestaat.
+- Werkwijze en de startpagina noemen de afspraken die de eigenaar op
+  24-09-2026 vaststelde: het eerste gesprek is gratis en duurt hoogstens een
+  uur, elke stap heeft een vaste prijs en er wordt niet op uurbasis gewerkt,
+  een factuur wordt binnen 14 dagen betaald, en een fout die binnen drie
+  maanden na de oplevering wordt gemeld, wordt zonder kosten hersteld.
 - De site in het Engels onder `/en/`, met Engelse adressen (`/en/services/`,
   `/en/approach/`, `/en/about/`, `/en/contact/`, `/en/privacy/`,
   `/en/terms/`). Rechts in de kop staat een knop naar dezelfde pagina in de

@@ -15,7 +15,7 @@ kop = "The steps of an assignment"
 [[extra.blokken.items]]
 titel = "The first conversation"
 tekst = [
-  "The conversation is about what happens now and what should happen. We ask questions until we can retell your process. Then we write down what we understood and send it to you. If it is wrong, you know before anything is built.",
+  "The first conversation is free and lasts at most one hour. It is about what happens now and what should happen. We ask questions until we can retell your process. Then we write down what we understood and send it to you. If it is wrong, you know before anything is built.",
   "If the assignment is too large to oversee in one conversation, we propose a preliminary study: reading the systems that are there and talking to the people who work with them. The result is a written report, and it is yours, also if you continue with somebody else afterwards.",
 ]
 
@@ -24,7 +24,7 @@ titel = "The design and the plan"
 tekst = [
   "What gets built is on paper first: which data the system keeps, what happens with every case that deviates, which parts it consists of and what it connects to. If a design already exists, yours or another party's, we read it and say what it lacks.",
   "The plan beside it states what gets built and what is expressly left out. That second list exists because most arguments about software are about something one side thought was included.",
-  "It also states what it costs and how it is invoiced. We agree the price in advance, per step or per hour.",
+  "It also states what it costs. Every step has a fixed price, settled in advance; we do not work on an hourly basis. A step is invoiced after its delivery, and you pay an invoice within 14 days.",
 ]
 
 [[extra.blokken.items]]
@@ -39,6 +39,7 @@ titel = "Testing and going live"
 tekst = [
   "What is delivered is tested. Where possible with tests that run by themselves on every change, and always with a round in which you try it yourself. What comes up in that round, we resolve before the software goes into use.",
   "Going live comes with an agreement about the moment, about who is present and about how you get back to the old situation if it goes wrong.",
+  "An error you report in writing within three months after delivery, we repair at no cost. That follows from the [terms and conditions](/en/terms/), articles 48 and 54.",
 ]
 
 [[extra.blokken.items]]
