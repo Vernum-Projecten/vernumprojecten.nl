@@ -15,9 +15,10 @@ en waar deze pagina een artikel noemt, kunt u het daar nalezen.
 ## Wie de gegevens verwerkt
 
 De verwerkingsverantwoordelijke is Vernum Projecten B.V., gevestigd in
-Groningen, ingeschreven in het Handelsregister onder nummer 42164990. U
-bereikt ons op [info@vernumprojecten.nl](mailto:info@vernumprojecten.nl). De
-overige gegevens staan op de pagina [Contact](@/contact.md).
+Groningen, ingeschreven in het Handelsregister onder nummer 42164990. Voor
+een vraag over uw persoonsgegevens bereikt u ons op
+[privacy@vernumprojecten.nl](mailto:privacy@vernumprojecten.nl). De overige
+gegevens staan op de pagina [Contact](@/contact.md).
 
 ## Wat deze site zelf doet
 
@@ -80,7 +81,8 @@ in een gangbaar bestandsformaat te ontvangen (artikel 20) en om bezwaar te
 maken tegen een verwerking op grond van een gerechtvaardigd belang (artikel
 21).
 
-Schrijf daarvoor naar het adres op de pagina [Contact](@/contact.md). Wij
+Schrijf daarvoor naar
+[privacy@vernumprojecten.nl](mailto:privacy@vernumprojecten.nl). Wij
 antwoorden binnen de termijn die artikel 12 van de AVG stelt. Komt u er met
 ons niet uit, dan heeft u op grond van artikel 77 van de AVG het recht een
 klacht in te dienen bij de
