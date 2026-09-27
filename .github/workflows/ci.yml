@@ -64,12 +64,12 @@ jobs:
       # than one list, so each pin stays on a line of its own that the guard
       # can read.
       - name: Install the pinned zizmor
-        uses: taiki-e/install-action@26e9283f268b880168bdbd2c545dfcd60ec2c6ab # v2.87.13
+        uses: taiki-e/install-action@94c31af3204a9f15ab40b35ad084410b905bbc73 # v2.87.17
         with:
           tool: zizmor@1.30.1
 
       - name: Install the pinned shellcheck
-        uses: taiki-e/install-action@26e9283f268b880168bdbd2c545dfcd60ec2c6ab # v2.87.13
+        uses: taiki-e/install-action@94c31af3204a9f15ab40b35ad084410b905bbc73 # v2.87.17
         with:
           tool: shellcheck@${{ env.SHELLCHECK_VERSION }}
 
