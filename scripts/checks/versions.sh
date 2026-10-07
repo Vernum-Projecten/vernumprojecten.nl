@@ -19,6 +19,9 @@
 #                        vendored files.
 #   5. licence           LICENSE is the Apache License 2.0 and no first-party
 #                        file claims another licence.
+#   6. backgrounds       static/achtergronden/ matches its SHA256SUMS, and
+#                        every image a script under scripts/intune/ downloads
+#                        is listed there.
 #
 # Usage:
 #   scripts/checks/versions.sh
@@ -245,6 +248,17 @@ if [ -f static/achtergronden/SHA256SUMS ]; then
 else
   note "no static/achtergronden/SHA256SUMS yet, skipped"
 fi
+# Every background a device script downloads has to be one the site serves.
+for script in scripts/intune/*.sh; do
+  [ -f "$script" ] || continue
+  while IFS= read -r image; do
+    if /usr/bin/grep -qE "  ${image}\$" static/achtergronden/SHA256SUMS 2>/dev/null; then
+      note "OK: $script downloads $image, which SHA256SUMS lists"
+    else
+      bad "$script downloads $image, which static/achtergronden/SHA256SUMS does not list"
+    fi
+  done < <(/usr/bin/grep -oE 'vernum-projecten-[a-z0-9-]+\.png' "$script" | sort -u)
+done
 
 echo "== licence (LICENSE <-> SPDX headers)"
 if [ -f LICENSE ]; then
