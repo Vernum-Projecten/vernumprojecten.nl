@@ -103,10 +103,10 @@ nagekeken, met de datum erbij:
 | `content/` | de pagina's als markdown, `naam.md` in het Nederlands en `naam.en.md` in het Engels |
 | `templates/` | de Tera-sjablonen: de schil, de twee paginavormen, de onderdelen |
 | `sass/` | de ene stylesheet, plus het palet en de lettertypen van de huisstijl |
-| `static/` | wat ongewijzigd meegaat: merkbestanden, favicons, de webfonts, `CNAME`, en onder `achtergronden/` de bureaublad-, vergrendelscherm- en Teams-achtergronden die het installatiescript van de apparaten ophaalt, met een `SHA256SUMS` |
+| `static/` | wat ongewijzigd meegaat: merkbestanden, favicons, de webfonts, `CNAME`, en onder `achtergronden/` de achtergrond voor het vergrendelscherm en het bureaublad van een Mac en de Teams-achtergrond die de installatiescripts van de apparaten ophalen, met een `SHA256SUMS` |
 | `docs/` | de versiematrix, de huisstijl, hoe er gepubliceerd wordt, en onder `nldigital/` de handleiding van de uitgever bij de voorwaarden |
 | `scripts/checks/` | de controles die per bewerking en in CI draaien |
-| `scripts/intune/` | de scripts die Intune op elke Mac draait. `set-company-wallpaper.sh` haalt de donkere bureaubladachtergrond van de site, controleert hem tegen `SHA256SUMS` en zet hem waar het profiel naar wijst; `set-teams-background.sh` zet de Teams-achtergrond in de uploadmap van de gebruiker, omdat Microsoft 365 Business Premium geen Teams Premium bevat |
+| `scripts/intune/` | de scripts die Intune op elke Mac draait. `set-company-wallpaper.sh` haalt de donkere vergrendelschermachtergrond van de site, die macOS ook op het bureaublad toont, controleert hem tegen `SHA256SUMS` en zet hem waar het profiel naar wijst; `set-teams-background.sh` zet de Teams-achtergrond in de uploadmap van de gebruiker, omdat Microsoft 365 Business Premium geen Teams Premium bevat |
 | `.github/workflows/` | `ci.yml` (de controles) en `pages.yml` (bouwen en publiceren) |
 
 ## Licentie
