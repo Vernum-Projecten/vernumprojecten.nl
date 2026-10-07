@@ -116,9 +116,11 @@ rest stays out.
   `brand-contrast.sh`, `company-name.sh`.
 - `scripts/gh/`: `fields.sh`, which sets the organisation's native issue type,
   Priority and Effort fields.
-- `scripts/intune/`: `set-company-wallpaper.sh`, the macOS shell script Intune
-  runs to install the desktop background. It is never published by the site;
-  `versions.sh` fails when it names an image `static/achtergronden/` lacks.
+- `scripts/intune/`: the macOS shell scripts Intune runs.
+  `set-company-wallpaper.sh` installs the desktop background as root;
+  `set-teams-background.sh` puts the Teams background in the signed-in user's
+  Teams uploads folder. Neither is published by the site, and `versions.sh`
+  fails when one names an image `static/achtergronden/` lacks.
 - `.github/workflows/`: `ci.yml` (the guards) and `pages.yml` (build and
   publish).
 - `.claude/`: the working discipline. `rules/`, `hooks/`, `settings.json`.
