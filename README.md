@@ -106,7 +106,7 @@ nagekeken, met de datum erbij:
 | `static/` | wat ongewijzigd meegaat: merkbestanden, favicons, de webfonts, `CNAME`, en onder `achtergronden/` de bureaublad-, vergrendelscherm- en Teams-achtergronden die het installatiescript van de apparaten ophaalt, met een `SHA256SUMS` |
 | `docs/` | de versiematrix, de huisstijl, hoe er gepubliceerd wordt, en onder `nldigital/` de handleiding van de uitgever bij de voorwaarden |
 | `scripts/checks/` | de controles die per bewerking en in CI draaien |
-| `scripts/intune/` | `set-company-wallpaper.sh`, dat Intune op elke Mac draait: het haalt de donkere bureaubladachtergrond van de site, controleert hem tegen `SHA256SUMS` en zet hem waar het profiel naar wijst |
+| `scripts/intune/` | de scripts die Intune op elke Mac draait. `set-company-wallpaper.sh` haalt de donkere bureaubladachtergrond van de site, controleert hem tegen `SHA256SUMS` en zet hem waar het profiel naar wijst; `set-teams-background.sh` zet de Teams-achtergrond in de uploadmap van de gebruiker, omdat Microsoft 365 Business Premium geen Teams Premium bevat |
 | `.github/workflows/` | `ci.yml` (de controles) en `pages.yml` (bouwen en publiceren) |
 
 ## Licentie
