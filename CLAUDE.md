@@ -106,7 +106,9 @@ rest stays out.
   style palette and font faces as two partials. There is one copy of each
   file, so nothing can drift against a second one.
 - `static/`: what is copied verbatim: the brand files, the favicons, the
-  vendored Inter woff2 files with their licence and checksums, `CNAME`.
+  vendored Inter woff2 files with their licence and checksums, `CNAME`, and
+  under `achtergronden/` the dark desktop, lock-screen and Teams backgrounds
+  the company's devices download, with a `SHA256SUMS`.
 - `docs/`: `VERSIONS.md` (the pin matrix every other file follows),
   `huisstijl.md` (the house style) and `publiceren.md` (how the site reaches
   the domain, and how the repository is configured).
@@ -114,6 +116,9 @@ rest stays out.
   `brand-contrast.sh`, `company-name.sh`.
 - `scripts/gh/`: `fields.sh`, which sets the organisation's native issue type,
   Priority and Effort fields.
+- `scripts/intune/`: `set-company-wallpaper.sh`, the macOS shell script Intune
+  runs to install the desktop background. It is never published by the site;
+  `versions.sh` fails when it names an image `static/achtergronden/` lacks.
 - `.github/workflows/`: `ci.yml` (the guards) and `pages.yml` (build and
   publish).
 - `.claude/`: the working discipline. `rules/`, `hooks/`, `settings.json`.
