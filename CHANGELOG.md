@@ -11,10 +11,11 @@ en de versienummering volgt [Semantic Versioning 2.0.0](https://semver.org/lang/
 
 ### Toegevoegd
 
-- Zes achtergronden onder `/achtergronden/`, licht en donker: het
-  vergrendelscherm en het bureaublad op 3024 bij 1964 px en Teams op 1920 bij
-  1080 px. Het installatiescript van de apparaten haalt ze op en controleert
-  ze tegen `/achtergronden/SHA256SUMS`.
+- Drie donkere achtergronden onder `/achtergronden/`: het vergrendelscherm
+  en het bureaublad op 6048 bij 3928 px, twee keer de resolutie van het
+  scherm van een MacBook Pro 14", en Teams op 1920 bij 1080 px. Het
+  installatiescript van de apparaten haalt ze op en controleert ze tegen
+  `/achtergronden/SHA256SUMS`.
 - De startpagina bestaat uit blokken: een opening met het merkteken en de
   actie, drie diensten met een pictogram, de vier stappen van een opdracht en
   een afsluiting. De andere pagina's kregen een kopblok met secties eronder.
