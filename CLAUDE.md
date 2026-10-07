@@ -107,8 +107,9 @@ rest stays out.
   file, so nothing can drift against a second one.
 - `static/`: what is copied verbatim: the brand files, the favicons, the
   vendored Inter woff2 files with their licence and checksums, `CNAME`, and
-  under `achtergronden/` the dark desktop, lock-screen and Teams backgrounds
-  the company's devices download, with a `SHA256SUMS`.
+  under `achtergronden/` the two dark backgrounds the company's devices
+  download, with a `SHA256SUMS`: one for the Mac lock screen, which macOS
+  also shows on the desktop, and one for Teams.
 - `docs/`: `VERSIONS.md` (the pin matrix every other file follows),
   `huisstijl.md` (the house style) and `publiceren.md` (how the site reaches
   the domain, and how the repository is configured).
@@ -117,7 +118,8 @@ rest stays out.
 - `scripts/gh/`: `fields.sh`, which sets the organisation's native issue type,
   Priority and Effort fields.
 - `scripts/intune/`: the macOS shell scripts Intune runs.
-  `set-company-wallpaper.sh` installs the desktop background as root;
+  `set-company-wallpaper.sh` installs the lock-screen background, which is
+  also the desktop picture, as root;
   `set-teams-background.sh` puts the Teams background in the signed-in user's
   Teams uploads folder. Neither is published by the site, and `versions.sh`
   fails when one names an image `static/achtergronden/` lacks.

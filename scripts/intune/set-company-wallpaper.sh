@@ -4,17 +4,18 @@
 # scripts/intune/set-company-wallpaper.sh: install the Vernum Projecten
 # wallpaper on a managed Mac.
 #
-# Intune runs this as a macOS shell script. It downloads the dark desktop
+# Intune runs this as a macOS shell script. It downloads the dark lock-screen
 # background from the site, verifies it against the SHA256SUMS published next
 # to it, and puts it where the Settings catalog profile points:
 #
 #   Desktop > Override Picture Path =
 #     /Library/Desktop Pictures/Vernum Projecten/wallpaper.png
 #
-# macOS shows the desktop picture on the lock screen as well. When the
-# installed file already matches, nothing changes and the Dock is left alone,
-# so any Intune frequency is safe. scripts/checks/versions.sh fails when the
-# image named below is missing from static/achtergronden/SHA256SUMS.
+# macOS shows the desktop picture on the lock screen as well, so this one
+# image serves both. When the installed file already matches, nothing changes
+# and the Dock is left alone, so any Intune frequency is safe.
+# scripts/checks/versions.sh fails when the image named below is missing from
+# static/achtergronden/SHA256SUMS.
 #
 # Usage (Intune > Devices > macOS > Shell scripts):
 #   Run script as signed-in user: No (the script runs as root)
@@ -24,7 +25,7 @@
 set -uo pipefail
 
 BASE_URL="https://vernumprojecten.nl/achtergronden"
-IMAGE_NAME="vernum-projecten-macbookpro14-donker.png"
+IMAGE_NAME="vernum-projecten-lockscreen-donker.png"
 TARGET_DIR="/Library/Desktop Pictures/Vernum Projecten"
 TARGET_FILE="$TARGET_DIR/wallpaper.png"
 LOG="/Library/Logs/Microsoft/IntuneScripts/company-wallpaper.log"
