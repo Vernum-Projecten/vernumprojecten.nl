@@ -233,6 +233,19 @@ else
   note "no static/voorwaarden/SHA256SUMS yet, skipped"
 fi
 
+echo "== the backgrounds (static/achtergronden/ <-> SHA256SUMS)"
+# A device script verifies its download against this file, so it has to
+# describe the PNGs that are actually published.
+if [ -f static/achtergronden/SHA256SUMS ]; then
+  if (cd static/achtergronden && shasum -a 256 -c SHA256SUMS >/dev/null 2>&1); then
+    note "OK: the backgrounds match SHA256SUMS"
+  else
+    bad "static/achtergronden/ does not match its own SHA256SUMS"
+  fi
+else
+  note "no static/achtergronden/SHA256SUMS yet, skipped"
+fi
+
 echo "== licence (LICENSE <-> SPDX headers)"
 if [ -f LICENSE ]; then
   stale=0
