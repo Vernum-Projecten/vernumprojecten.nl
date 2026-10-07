@@ -103,7 +103,7 @@ nagekeken, met de datum erbij:
 | `content/` | de pagina's als markdown, `naam.md` in het Nederlands en `naam.en.md` in het Engels |
 | `templates/` | de Tera-sjablonen: de schil, de twee paginavormen, de onderdelen |
 | `sass/` | de ene stylesheet, plus het palet en de lettertypen van de huisstijl |
-| `static/` | wat ongewijzigd meegaat: merkbestanden, favicons, de webfonts, `CNAME` |
+| `static/` | wat ongewijzigd meegaat: merkbestanden, favicons, de webfonts, `CNAME`, en onder `achtergronden/` de bureaublad-, vergrendelscherm- en Teams-achtergronden die het installatiescript van de apparaten ophaalt, met een `SHA256SUMS` |
 | `docs/` | de versiematrix, de huisstijl, hoe er gepubliceerd wordt, en onder `nldigital/` de handleiding van de uitgever bij de voorwaarden |
 | `scripts/checks/` | de controles die per bewerking en in CI draaien |
 | `.github/workflows/` | `ci.yml` (de controles) en `pages.yml` (bouwen en publiceren) |
