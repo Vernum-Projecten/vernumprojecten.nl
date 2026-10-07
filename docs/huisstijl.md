@@ -108,6 +108,32 @@ De stylesheet vertaalt deze tokens één keer naar rollen (`--grond`, `--tekst`,
 `--merk`, `--gedempt`, `--lijn`, `--accent`). Het donkere thema wisselt alleen
 die rollen om, dus geen enkele regel noemt een tweede kleur.
 
+### Drukkleuren
+
+Voor drukwerk in offset op gestreken papier, zoals een visitekaartje, gelden
+de CMYK-waarden hieronder (eigenaar, 07-10-2026). Ze zijn omgerekend uit de
+hex-waarden met het profiel ISO Coated v2 (ECI), drukconditie FOGRA39, met
+relatief colorimetrische weergave. De hex-waarde blijft de bron: verandert een
+token, dan wordt zijn CMYK-waarde opnieuw omgerekend met hetzelfde profiel.
+
+| Token | Hex | CMYK | Totale inkt |
+| --- | --- | --- | --- |
+| `mist` | `#F5F4EF` | C5 M4 Y7 K0 | 16% |
+| `inkt` | `#15201B` | C81 M60 Y68 K79 | 288% |
+| `loof` | `#1E5A44` | C81 M30 Y69 K46 | 226% |
+| `blad` | `#7FBF9E` | C55 M4 Y46 K0 | 105% |
+| `goud` | `#A67C1F` | C13 M38 Y90 K35 | 176% |
+| `goud-licht` | `#D9B44A` | C9 M23 Y76 K11 | 119% |
+| `leisteen` | `#586560` | C60 M41 Y49 K36 | 186% |
+| `nevel` | `#A7B1AB` | C36 M21 Y29 K8 | 94% |
+| `zilver` | `#D8DAD4` | C18 M11 Y16 K1 | 46% |
+
+Een drukbestand gaat naar de drukker als PDF/X-4 met FOGRA39 als
+OutputIntent, met alle tekst omgezet in paden en zonder vlak boven 300%
+totale inkt; `inkt` komt met 288% het dichtst bij die grens. Drukt een
+drukker op ongestreken papier of onder een andere conditie, dan rekent u om
+met het profiel dat die drukker opgeeft.
+
 ## 5. Typografie
 
 Eén lettertype: **Inter** (versie 4.1, SIL Open Font License 1.1). De site
@@ -188,3 +214,8 @@ een smal scherm vouwt de navigatie eronder.
   contrast van niet-tekst: <https://www.w3.org/TR/WCAG22/#non-text-contrast>
 - Inter, Rasmus Andersson: <https://github.com/rsms/inter>, release v4.1
   (2024-11-16); SIL Open Font License 1.1: <https://openfontlicense.org/>
+- ISO Coated v2 (ECI), `ISOcoated_v2_eci.icc` uit het pakket
+  `eci_offset_2009.zip` van <https://www.eci.org/en/downloads>, sha256
+  `128dc02f7246cc3807af0323695379f64151a8f27a587736acc59f8b6ce894b8`,
+  gelezen 07-10-2026. De drukkleuren zijn ermee omgerekend door Ghostscript
+  10.08.0 (`-sDEVICE=pamcmyk32 -sOutputICCProfile=… -dRenderIntent=1`).
